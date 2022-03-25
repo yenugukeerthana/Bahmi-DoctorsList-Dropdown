@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_openmrs_esm_offline_tools_app=self.webpackChunk_openmrs_esm_offline_tools_app||[]).push([[283],{5283:(e,n,o)=>{o.r(n),o.d(n,{default:()=>p});var s=o(6983),l=o.n(s),f=o(2680),t=o(7657);function p(){const{t:e}=(0,f.useTranslation)();return l().createElement(t.ConfigurableLink,{to:"${openmrsSpaBase}/offline-tools"},e("offlineToolsAppMenuLink","Offline tools"))}}}]);
+//# sourceMappingURL=283.js.map

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_openmrs_esm_devtools_app=self.webpackChunk_openmrs_esm_devtools_app||[]).push([[561],{561:(e,o,s)=>{s.r(o),s.d(o,{setupOpenMRS:()=>p,importTranslation:()=>n});var t=s(657);const n=()=>Promise.resolve();function p(){return{lifecycle:(0,t.getAsyncLifecycle)((()=>s.e(67).then(s.bind(s,67))),{featureName:"devtools",moduleName:"@openmrs/esm-devtools-app"}),activate:()=>"development"===window.spaEnv||!!localStorage.getItem("openmrs:devtools")}}}}]);
+//# sourceMappingURL=561.js.map

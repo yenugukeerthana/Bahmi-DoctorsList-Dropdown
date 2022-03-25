@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_openmrs_esm_offline_tools_app=self.webpackChunk_openmrs_esm_offline_tools_app||[]).push([[438],{5438:(e,t,n)=>{n.r(t),n.d(t,{default:()=>m});var o=n(6983),l=n.n(o),s=n(7657),a=n(2680),r=n(5867);const m=()=>{const{t:e}=(0,a.useTranslation)();return l().createElement(l().Fragment,null,l().createElement(r.Z,{title:e("home","Home")}),l().createElement(s.ExtensionSlot,{extensionSlotName:"offline-tools-page-slot"}))}}}]);
+//# sourceMappingURL=438.js.map
