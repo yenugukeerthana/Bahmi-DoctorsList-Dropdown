@@ -8,9 +8,11 @@
   "homepage": "https://github.com/bahmni/bahmni-lab-frontend#readme",
   "scripts": {
     "bahmni": "openmrs develop --spa-path '/lab' --importmap 'dist/importmap.json' --port 8091 --backend 'https://localhost/openmrs'",
-    "omrs:appshell": "openmrs build --spa-path /lab --api-url 'https://localhost/openmrs' --target 'omrs-app-shell'",
+    "omrs:appshell": "openmrs build --spa-path /lab --api-url 'https://localhost/openmrs' --config-path 'config/config.json' --target 'omrs-app-shell'",
     "omrs:assemble": "openmrs assemble --config 'config/spa-build-config.json' --mode 'config' --target 'omrs-app-shell'",
     "importmap": "node ./tools/updateImportMap.js",
+    "build:appshell": "yarn omrs:appshell && yarn omrs:assemble && yarn importmap",
+    "build:assemble": "yarn omrs:assemble && yarn importmap",
     "serve": "webpack serve --mode=development",
     "debug": "npm run serve",
     "build": "rimraf dist && npx webpack --mode production",

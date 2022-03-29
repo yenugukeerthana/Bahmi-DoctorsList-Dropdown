@@ -7,14 +7,6 @@ const importmap = JSON.parse(fileData)
 importmap['imports']['@bahmni/lab-app'] =
   'https://localhost/lab/bahmni-lab-app.js'
 
-// fs.writeFile(
-//   './omrs-app-shell/importmap.json',
-//   JSON.stringify(importmap),
-//   function(err, result) {
-//     if (err) console.log('error', err)
-//   },
-// )
-
 fs.writeFile(
   './omrs-app-shell/importmap.json',
   JSON.stringify(importmap, null, 4),
