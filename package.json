@@ -10,6 +10,7 @@
     "bahmni": "openmrs develop --spa-path '/lab' --importmap 'dist/importmap.json' --port 8091 --backend 'https://localhost/openmrs'",
     "omrs:appshell": "openmrs build --spa-path /lab --api-url 'https://localhost/openmrs' --target 'omrs-app-shell'",
     "omrs:assemble": "openmrs assemble --config 'config/spa-build-config.json' --mode 'config' --target 'omrs-app-shell'",
+    "importmap": "node ./tools/updateImportMap.js",
     "serve": "webpack serve --mode=development",
     "debug": "npm run serve",
     "build": "rimraf dist && npx webpack --mode production",
