@@ -1,5 +1,5 @@
 {
-    "publicUrl": "http://localhost/bahmni/lab",
+    "publicUrl": "https://localhost/lab",
     "frontendModules": {
       "@openmrs/esm-offline-tools-app": "latest",
       "@openmrs/esm-primary-navigation-app":"latest",

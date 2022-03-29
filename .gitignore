@@ -61,7 +61,8 @@ typings/
 # next.js build output
 .next
 
-dist/
+#FIXME temporarily dissabling the dist folder
+#dist/
 
 # Intellij integration
 *.iml

@@ -1,5 +1,5 @@
 {
-  "name": "@bahmni/lab-frontend",
+  "name": "@bahmni/lab-app",
   "version": "1.0.0",
   "description": "Bahmni Lab Frontend",
   "browser": "dist/bahmni-lab-app.js",
@@ -7,8 +7,8 @@
   "license": "MIT",
   "homepage": "https://github.com/bahmni/bahmni-lab-frontend#readme",
   "scripts": {
-    "bahmni": "openmrs develop --spa-path '/bahmni/lab' --importmap 'omrs-app-shell/importmap.json' --port 8091 --backend 'https://localhost:8080'",
-    "omrs:appshell": "openmrs build --spa-path /bahmni/lab --api-url 'https://localhost:8080' --target 'omrs-app-shell'",
+    "bahmni": "openmrs develop --spa-path '/lab' --importmap 'dist/importmap.json' --port 8091 --backend 'https://localhost/openmrs'",
+    "omrs:appshell": "openmrs build --spa-path /lab --api-url 'https://localhost/openmrs' --target 'omrs-app-shell'",
     "omrs:assemble": "openmrs assemble --config 'config/spa-build-config.json' --mode 'config' --target 'omrs-app-shell'",
     "serve": "webpack serve --mode=development",
     "debug": "npm run serve",
@@ -18,7 +18,7 @@
     "prettier": "prettier --config prettier.config.js --write \"src/**/*.{ts,tsx}\"",
     "typescript": "tsc",
     "prepublish": "npm run build",
-    "test": "cross-env TZ=UTC jest --config jest.config.json --verbose false --passWithNoTests",
+    "test": "jest --config jest.config.json --verbose false --passWithNoTests",
     "test:watch": "jest --passWithNoTests --watch",
     "coverage": "npm test -- --coverage",
     "badges": "npm run coverage && jest-coverage-badges --output './badges' "
@@ -108,8 +108,9 @@
     "i18next": "^19.4.2",
     "identity-obj-proxy": "^3.0.0",
     "istanbul-badges-readme": "^1.4.0",
-    "jest": "^24.9.0",
+    "jest": "^27.5.1",
     "jest-cli": "^24.9.0",
+    "jest-watch-typeahead": "^1.0.0",
     "node-sass": "^6.0.1",
     "openmrs": "^3.2.1-pre.1015",
     "prettier": "^1.18.2",

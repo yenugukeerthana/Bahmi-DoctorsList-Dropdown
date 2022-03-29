@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_openmrs_esm_primary_navigation_app=self.webpackChunk_openmrs_esm_primary_navigation_app||[]).push([[574],{3574:a=>{a.exports=JSON.parse('{"notifications":"Notifications"}')}}]);

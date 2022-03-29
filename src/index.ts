@@ -42,7 +42,7 @@ function setupOpenMRS() {
     pages: [
       {
         load: getAsyncLifecycle(() => import('./lab-entry'), options),
-        route: 'labLite',
+        route: 'home',
       },
     ],
   }

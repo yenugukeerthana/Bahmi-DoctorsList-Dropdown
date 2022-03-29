@@ -1,0 +1,10 @@
+{
+  "imports": {
+    "@openmrs/esm-devtools-app": "https://localhost/lab/openmrs-esm-devtools-app-3.2.0/openmrs-esm-devtools-app.js",
+    "@openmrs/esm-implementer-tools-app": "https://localhost/lab/openmrs-esm-implementer-tools-app-3.2.0/openmrs-esm-implementer-tools-app.js",
+    "@openmrs/esm-login-app": "https://localhost/lab/openmrs-esm-login-app-3.2.0/openmrs-esm-login-app.js",
+    "@openmrs/esm-primary-navigation-app": "https://localhost/lab/openmrs-esm-primary-navigation-app-3.2.0/openmrs-esm-primary-navigation-app.js",
+    "@openmrs/esm-offline-tools-app": "https://localhost/lab/openmrs-esm-offline-tools-app-3.2.0/openmrs-esm-offline-tools-app.js",
+    "@bahmni/lab-app": "https://localhost/lab/bahmni-lab-app.js"
+  }
+}

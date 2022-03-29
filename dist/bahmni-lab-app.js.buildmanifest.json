@@ -1,0 +1,216 @@
+{
+  "chunks": [
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 422891,
+      "sizes": {
+        "javascript": 422891
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [
+        "16.js"
+      ],
+      "auxiliaryFiles": [
+        "16.js.map"
+      ],
+      "hash": "a54bdb9aec4dc538002e",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 294,
+      "sizes": {
+        "javascript": 252,
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [
+        "46.js"
+      ],
+      "auxiliaryFiles": [
+        "46.js.map"
+      ],
+      "hash": "c97271b04c03c163d8f7",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 39122,
+      "sizes": {
+        "javascript": 39122
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [
+        "269.js"
+      ],
+      "auxiliaryFiles": [
+        "269.js.map"
+      ],
+      "hash": "621d02e11a635cb02e23",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 8973,
+      "sizes": {
+        "javascript": 8973
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [
+        "294.js"
+      ],
+      "auxiliaryFiles": [
+        "294.js.map"
+      ],
+      "hash": "7eb0db8c7333919bf924",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 35,
+      "sizes": {
+        "javascript": 35
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [
+        "574.js"
+      ],
+      "auxiliaryFiles": [],
+      "hash": "fd764de2bbe3a92cf091",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": false,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: default)",
+      "size": 42,
+      "sizes": {
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [],
+      "auxiliaryFiles": [],
+      "hash": "69e48c478c443f38d0ef",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 12,
+      "sizes": {
+        "javascript": 12
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [
+        "757.js"
+      ],
+      "auxiliaryFiles": [],
+      "hash": "eb9a8dc55e522fcb02d0",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 1466,
+      "sizes": {
+        "consume-shared": 42,
+        "javascript": 1424
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [
+        "809.js"
+      ],
+      "auxiliaryFiles": [
+        "809.js.map"
+      ],
+      "hash": "e733d302e8a668ddf01e",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "recorded": false,
+      "size": 21114,
+      "sizes": {
+        "javascript": 3409,
+        "share-init": 126,
+        "runtime": 17579
+      },
+      "names": [
+        "@bahmni/lab-app"
+      ],
+      "idHints": [],
+      "runtime": [
+        "@bahmni/lab-app"
+      ],
+      "files": [
+        "bahmni-lab-app.js"
+      ],
+      "auxiliaryFiles": [
+        "bahmni-lab-app.js.map"
+      ],
+      "hash": "afb950a15faf3e06fac1",
+      "childrenByOrder": {}
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_openmrs_esm_login_app=self.webpackChunk_openmrs_esm_login_app||[]).push([[673],{5673:e=>{e.exports=JSON.parse('{"confirm":"Onayla","location":"Konum","locationNotFound":"Üzgünüz, konum bulunamadı","login":"Giriş","password":"Parola","username":"Kullanıcı Adı","welcome":"Hoş Geldiniz","poweredBy":"Destekleyen"}')}}]);
