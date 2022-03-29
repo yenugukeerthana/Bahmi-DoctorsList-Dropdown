@@ -72,7 +72,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/runtime": "^7.12.13",
-    "@jsenv/file-size-impact": "^12.1.8",
     "@openmrs/esm-framework": "^3.2.1-pre.1015",
     "@openmrs/esm-patient-common-lib": "next",
     "@testing-library/dom": "^7.20.0",
