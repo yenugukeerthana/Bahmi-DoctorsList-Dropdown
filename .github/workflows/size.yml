@@ -1,9 +1,10 @@
 name: Report bundle size
 
 on:
+  push:
+    branches: [main]
   pull_request_target:
-    branches: [master]
-
+    branches: [main]
 jobs:
   file_size_impact:
     runs-on: ubuntu-latest
@@ -14,8 +15,8 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: "16.6.1"
-      - run: npx lerna bootstrap
+          node-version: "16.13.0"
+      - run: yarn install
       - name: Report changes
         run: node ./tools/size-reporter.mjs
         env:
