@@ -2,12 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
-  release:
-    types:
-      - created
+    branches: [main]
 
 jobs:
   build:
@@ -19,11 +16,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14.x"
-      - run: npx lerna bootstrap
-      - run: npx lerna run lint
-      - run: npx lerna run typescript
-      - run: npm run test
-      - run: npx lerna run build
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn typescript
+      - run: yarn test
+      - run: yarn build
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
