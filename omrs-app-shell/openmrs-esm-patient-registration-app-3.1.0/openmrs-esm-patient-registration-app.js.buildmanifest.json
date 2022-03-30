@@ -1,0 +1,581 @@
+{
+  "chunks": [
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: defaultVendors)",
+      "size": 47433,
+      "sizes": {
+        "javascript": 47433
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "30.js"
+      ],
+      "auxiliaryFiles": [
+        "30.js.map"
+      ],
+      "hash": "326e64664ee3d02da779",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 1125,
+      "sizes": {
+        "javascript": 1125
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "38.js"
+      ],
+      "auxiliaryFiles": [
+        "38.js.map"
+      ],
+      "hash": "085991ed45b07e356593",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 27940,
+      "sizes": {
+        "javascript": 27898,
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "71.js"
+      ],
+      "auxiliaryFiles": [
+        "71.js.map"
+      ],
+      "hash": "5c45dfedb31e5f018938",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 45252,
+      "sizes": {
+        "javascript": 45252
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "258.js"
+      ],
+      "auxiliaryFiles": [
+        "258.js.map"
+      ],
+      "hash": "c6fc99ddc7521386e67a",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 7867,
+      "sizes": {
+        "javascript": 7867
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "272.js"
+      ],
+      "auxiliaryFiles": [
+        "272.js.map"
+      ],
+      "hash": "82ebe76737231907230e",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: defaultVendors)",
+      "size": 200100,
+      "sizes": {
+        "javascript": 200100
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "295.js"
+      ],
+      "auxiliaryFiles": [
+        "295.js.map"
+      ],
+      "hash": "55d4cfdd922f9bed8813",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: defaultVendors)",
+      "size": 156259,
+      "sizes": {
+        "javascript": 156259
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "309.js"
+      ],
+      "auxiliaryFiles": [
+        "309.js.map"
+      ],
+      "hash": "157eba410c04eceb7771",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 9103,
+      "sizes": {
+        "javascript": 9103
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "323.js"
+      ],
+      "auxiliaryFiles": [
+        "323.js.map"
+      ],
+      "hash": "17f6a0a2ca891341452b",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 1026,
+      "sizes": {
+        "javascript": 1026
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "324.js"
+      ],
+      "auxiliaryFiles": [
+        "324.js.map"
+      ],
+      "hash": "b5255c41f9d0a6a664ff",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "recorded": false,
+      "size": 22411,
+      "sizes": {
+        "javascript": 3409,
+        "share-init": 252,
+        "runtime": 18750
+      },
+      "names": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "openmrs-esm-patient-registration-app.js"
+      ],
+      "auxiliaryFiles": [
+        "openmrs-esm-patient-registration-app.js.map"
+      ],
+      "hash": "2464939c812525849fc0",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 316642,
+      "sizes": {
+        "javascript": 316642
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "339.js"
+      ],
+      "auxiliaryFiles": [
+        "339.js.map"
+      ],
+      "hash": "9ebfc7f19ccfed01faee",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: defaultVendors)",
+      "size": 23246,
+      "sizes": {
+        "javascript": 23246
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "401.js"
+      ],
+      "auxiliaryFiles": [
+        "401.js.map"
+      ],
+      "hash": "07d44a634a0bf20393bd",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 109242,
+      "sizes": {
+        "javascript": 109242
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "402.js"
+      ],
+      "auxiliaryFiles": [
+        "402.js.map"
+      ],
+      "hash": "6db30f5a3465fa63f43b",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": false,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: default)",
+      "size": 42,
+      "sizes": {
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [],
+      "auxiliaryFiles": [],
+      "hash": "ba9939534e3c0e39ad47",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 2568,
+      "sizes": {
+        "javascript": 2568
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "574.js"
+      ],
+      "auxiliaryFiles": [],
+      "hash": "5578d281d3e73fc7ad9e",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 586941,
+      "sizes": {
+        "javascript": 586941
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "635.js"
+      ],
+      "auxiliaryFiles": [
+        "635.js.map"
+      ],
+      "hash": "9725ed075460a0d4dfcd",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 3549,
+      "sizes": {
+        "javascript": 3549
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "664.js"
+      ],
+      "auxiliaryFiles": [
+        "664.js.map"
+      ],
+      "hash": "ef45798af034dbd9f2a1",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 8973,
+      "sizes": {
+        "javascript": 8973
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "784.js"
+      ],
+      "auxiliaryFiles": [
+        "784.js.map"
+      ],
+      "hash": "beb5d63cc48e80a7de5e",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 84458,
+      "sizes": {
+        "javascript": 84458
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "817.js"
+      ],
+      "auxiliaryFiles": [
+        "817.js.map"
+      ],
+      "hash": "4fa08f7f6597edcb2265",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: defaultVendors)",
+      "size": 2859726,
+      "sizes": {
+        "javascript": 2859726
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "831.js"
+      ],
+      "auxiliaryFiles": [
+        "831.js.map"
+      ],
+      "hash": "38362f43db40a1217fcb",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": false,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: default)",
+      "size": 42,
+      "sizes": {
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [],
+      "auxiliaryFiles": [],
+      "hash": "468ba4f204ea92036d4c",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 242400,
+      "sizes": {
+        "javascript": 242358,
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "916.js"
+      ],
+      "auxiliaryFiles": [
+        "916.js.map"
+      ],
+      "hash": "92d279a4492a1664a546",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": false,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: default)",
+      "size": 42,
+      "sizes": {
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [],
+      "auxiliaryFiles": [],
+      "hash": "6f265806b201bd7afeb4",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 38955,
+      "sizes": {
+        "javascript": 38955
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-registration-app"
+      ],
+      "files": [
+        "932.js"
+      ],
+      "auxiliaryFiles": [
+        "932.js.map"
+      ],
+      "hash": "7158575dade24970f257",
+      "childrenByOrder": {}
+    }
+  ]
+}

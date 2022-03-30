@@ -1,0 +1,474 @@
+{
+  "chunks": [
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 4106,
+      "sizes": {
+        "javascript": 4106
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "1.js"
+      ],
+      "auxiliaryFiles": [
+        "1.js.map"
+      ],
+      "hash": "e6fc0f548d4305a4b465",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 35682,
+      "sizes": {
+        "javascript": 35682
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "26.js"
+      ],
+      "auxiliaryFiles": [
+        "26.js.map"
+      ],
+      "hash": "31cbf5c4efd02544552e",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: defaultVendors)",
+      "size": 583704,
+      "sizes": {
+        "javascript": 583704
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "234.js"
+      ],
+      "auxiliaryFiles": [
+        "234.js.map"
+      ],
+      "hash": "cd867a6b0355d927e071",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 270180,
+      "sizes": {
+        "javascript": 270180
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "294.js"
+      ],
+      "auxiliaryFiles": [
+        "294.js.map"
+      ],
+      "hash": "d10b2080134f3012c06d",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 316642,
+      "sizes": {
+        "javascript": 316642
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "339.js"
+      ],
+      "auxiliaryFiles": [
+        "339.js.map"
+      ],
+      "hash": "60be2754a376abb090b2",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 109242,
+      "sizes": {
+        "javascript": 109242
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "402.js"
+      ],
+      "auxiliaryFiles": [
+        "402.js.map"
+      ],
+      "hash": "dcf5b98762bac5ac5f0d",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": false,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: default)",
+      "size": 42,
+      "sizes": {
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [],
+      "auxiliaryFiles": [],
+      "hash": "356d3226c50b3a671a2a",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 248,
+      "sizes": {
+        "javascript": 248
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "574.js"
+      ],
+      "auxiliaryFiles": [],
+      "hash": "ddf1f274547767a51aa1",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 1515,
+      "sizes": {
+        "javascript": 1473,
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "607.js"
+      ],
+      "auxiliaryFiles": [
+        "607.js.map"
+      ],
+      "hash": "c44a5d2e69ca2511e01e",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: defaultVendors)",
+      "size": 266676,
+      "sizes": {
+        "javascript": 266676
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "628.js"
+      ],
+      "auxiliaryFiles": [
+        "628.js.map"
+      ],
+      "hash": "e9e6c7f8890588179fd1",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "reused as split chunk (cache group: defaultVendors)",
+      "size": 615977,
+      "sizes": {
+        "javascript": 615977
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "635.js"
+      ],
+      "auxiliaryFiles": [
+        "635.js.map"
+      ],
+      "hash": "ad5cfb03d8091a26488f",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": false,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: default)",
+      "size": 84,
+      "sizes": {
+        "consume-shared": 84
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [],
+      "auxiliaryFiles": [],
+      "hash": "3847fc822c7ab67a67f3",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 38955,
+      "sizes": {
+        "javascript": 38955
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "749.js"
+      ],
+      "auxiliaryFiles": [
+        "749.js.map"
+      ],
+      "hash": "f09207d070f4a229c3f8",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 12,
+      "sizes": {
+        "javascript": 12
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "757.js"
+      ],
+      "auxiliaryFiles": [],
+      "hash": "3cca42703ef958d807fa",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 8973,
+      "sizes": {
+        "javascript": 8973
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "784.js"
+      ],
+      "auxiliaryFiles": [
+        "784.js.map"
+      ],
+      "hash": "e49da7af65de9a8c3692",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 3783,
+      "sizes": {
+        "javascript": 3783
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "832.js"
+      ],
+      "auxiliaryFiles": [
+        "832.js.map"
+      ],
+      "hash": "a4cfdd2ea686462e26c5",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "size": 6494,
+      "sizes": {
+        "javascript": 6494
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "879.js"
+      ],
+      "auxiliaryFiles": [
+        "879.js.map"
+      ],
+      "hash": "c9d185eddc2632e0bbf2",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": false,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: default)",
+      "size": 42,
+      "sizes": {
+        "consume-shared": 42
+      },
+      "names": [],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [],
+      "auxiliaryFiles": [],
+      "hash": "0c55dc9c08b16183c6f7",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "recorded": false,
+      "reason": "split chunk (cache group: defaultVendors)",
+      "size": 33112,
+      "sizes": {
+        "javascript": 33112
+      },
+      "names": [],
+      "idHints": [
+        "vendors"
+      ],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "909.js"
+      ],
+      "auxiliaryFiles": [
+        "909.js.map"
+      ],
+      "hash": "729b8ff83d27fc626d46",
+      "childrenByOrder": {}
+    },
+    {
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "recorded": false,
+      "size": 22282,
+      "sizes": {
+        "javascript": 3409,
+        "share-init": 252,
+        "runtime": 18621
+      },
+      "names": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "idHints": [],
+      "runtime": [
+        "@openmrs/esm-patient-banner-app"
+      ],
+      "files": [
+        "openmrs-esm-patient-banner-app.js"
+      ],
+      "auxiliaryFiles": [
+        "openmrs-esm-patient-banner-app.js.map"
+      ],
+      "hash": "ed1c54bdbbf3ae8f9e0a",
+      "childrenByOrder": {}
+    }
+  ]
+}

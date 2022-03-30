@@ -1,60 +1,11 @@
-import { Type } from '@openmrs/esm-framework';
-
+import { Type, validators } from '@openmrs/esm-framework';
+import { spaRoot, patientLabChartPath} from './constants';
 export const configSchema = {
-  concepts: {
-    systolicBloodPressureUuid: {
-      _type: Type.ConceptUuid,
-      _default: '5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+  search: {
+    patientResultUrl: {
+      _default: spaRoot + patientLabChartPath, 
+      _description: 'Where clicking a patient result takes the user. Accepts template parameter ${patientUuid}',
+      _validators: [validators.isUrlWithTemplateParameters(['patientUuid'])],
     },
-    diastolicBloodPressureUuid: {
-      _type: Type.ConceptUuid,
-      _default: '5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-    pulseUuid: {
-      _type: Type.ConceptUuid,
-      _default: '5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-    temperatureUuid: {
-      _type: Type.ConceptUuid,
-      _default: '5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-    oxygenSaturationUuid: {
-      _type: Type.ConceptUuid,
-      _default: '5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-    heightUuid: {
-      _type: Type.ConceptUuid,
-      _default: '5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-    weightUuid: {
-      _type: Type.ConceptUuid,
-      _default: '5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-    respiratoryRateUuid: {
-      _type: Type.ConceptUuid,
-      _default: '5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-    generalPatientNoteUuid: {
-      _type: Type.ConceptUuid,
-      _default: '165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-    midUpperArmCircumferenceUuid: {
-      _type: Type.ConceptUuid,
-      _default: '1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    },
-  },
+  }
 };
-
-export interface ConfigObject {
-  concepts: {
-    systolicBloodPressureUuid: string;
-    diastolicBloodPressureUuid: string;
-    pulseUuid: string;
-    temperatureUuid: string;
-    oxygenSaturationUuid: string;
-    heightUuid: string;
-    weightUuid: string;
-    respiratoryRateUuid: string;
-    midUpperArmCircumferenceUuid: string;
-  };
-}

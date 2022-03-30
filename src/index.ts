@@ -5,7 +5,9 @@
  * microfrontend.
  */
 
-import {getAsyncLifecycle} from '@openmrs/esm-framework'
+import {defineConfigSchema, getAsyncLifecycle} from '@openmrs/esm-framework'
+import { configSchema } from './config-schema';
+import { labliteModuleName, searchModuleName } from './constants';
 
 /**
  * This tells the app shell how to obtain translation files: that they
@@ -31,19 +33,26 @@ const backendDependencies = {
 }
 
 function setupOpenMRS() {
-  const moduleName = '@bahmni/lab-lite-app'
+  defineConfigSchema(searchModuleName, configSchema)
 
   const options = {
     featureName: 'lab-lite',
-    moduleName,
+    moduleName: labliteModuleName,
   }
 
   return {
     pages: [
       {
-        load: getAsyncLifecycle(() => import('./lab-entry'), options),
+        load: getAsyncLifecycle(() => import('./lab-lite'), options),
         route: 'home',
       },
+      {
+        route: /^patient\/.+\/chart\/lab/,
+        load: getAsyncLifecycle(() => import('./patient-lab-chart/root.component'), {
+          featureName: 'patient-lab-chart-root',
+          moduleName: labliteModuleName,
+        })
+      }
     ],
   }
 }

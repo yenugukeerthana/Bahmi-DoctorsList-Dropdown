@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunk_bahmni_lab_app=self.webpackChunk_bahmni_lab_app||[]).push([[46],{46:(e,a,l)=>{l.r(a),l.d(a,{default:()=>u});var n=l(576),t=l.n(n),s=l(261);const u=()=>{const{t:e}=(0,s.useTranslation)();return t().createElement("h1",null,"Hello ",e("title"))}}}]);
-//# sourceMappingURL=46.js.map

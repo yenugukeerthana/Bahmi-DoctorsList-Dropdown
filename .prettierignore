@@ -5,6 +5,7 @@ node_modules/
 **/*.md
 **/*.json
 **/*.html
+omrs-app-shell/
 
 .vscode/
 .DS_Store

@@ -1,0 +1,12 @@
+{
+  "imports": {
+    "@openmrs/esm-devtools-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-devtools-app-3.2.0/openmrs-esm-devtools-app.js",
+    "@openmrs/esm-patient-banner-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-patient-banner-app-3.1.0/openmrs-esm-patient-banner-app.js",
+    "@openmrs/esm-patient-search-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-patient-search-app-3.1.0/openmrs-esm-patient-search-app.js",
+    "@openmrs/esm-primary-navigation-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-primary-navigation-app-3.2.0/openmrs-esm-primary-navigation-app.js",
+    "@openmrs/esm-offline-tools-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-offline-tools-app-3.2.0/openmrs-esm-offline-tools-app.js",
+    "@openmrs/esm-patient-registration-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-patient-registration-app-3.1.0/openmrs-esm-patient-registration-app.js",
+    "@openmrs/esm-implementer-tools-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-implementer-tools-app-3.2.0/openmrs-esm-implementer-tools-app.js"
+
+  }
+}
