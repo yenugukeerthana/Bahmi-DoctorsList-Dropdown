@@ -1,0 +1,36 @@
+name: Build and Publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  BAHMNI_VERSION: 0.94
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn typescript
+      - run: yarn test
+      - run: yarn build
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: Docker Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: bahmni/bahmni-lab:${{env.BAHMNI_VERSION}}-${{github.run_number}},bahmni/bahmni-lab:latest
