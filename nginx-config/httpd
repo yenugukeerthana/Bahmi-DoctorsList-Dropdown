@@ -1,2 +1,0 @@
-ProxyPass /lab http://lab:80
-ProxyPassReverse /lab http://lab:80
