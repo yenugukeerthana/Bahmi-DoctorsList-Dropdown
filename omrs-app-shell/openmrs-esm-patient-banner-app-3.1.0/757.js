@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_openmrs_esm_patient_banner_app=self.webpackChunk_openmrs_esm_patient_banner_app||[]).push([[757],{2757:e=>{e.exports={}}}]);

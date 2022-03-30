@@ -5,7 +5,7 @@ const fileData = fs.readFileSync('./omrs-app-shell/importmap.json', 'utf8')
 const importmap = JSON.parse(fileData)
 
 importmap['imports']['@bahmni/lab-app'] =
-  'https://localhost/lab/bahmni-lab-app.js'
+  '/lab/bahmni-lab-app.js'
 
 fs.writeFile(
   './omrs-app-shell/importmap.json',
