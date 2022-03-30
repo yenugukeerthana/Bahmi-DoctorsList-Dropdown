@@ -6,8 +6,8 @@
  */
 
 import {defineConfigSchema, getAsyncLifecycle} from '@openmrs/esm-framework'
-import { configSchema } from './config-schema';
-import { labliteModuleName, searchModuleName } from './constants';
+import {configSchema} from './config-schema'
+import {labliteModuleName, searchModuleName} from './constants'
 
 /**
  * This tells the app shell how to obtain translation files: that they
@@ -48,11 +48,14 @@ function setupOpenMRS() {
       },
       {
         route: /^patient\/.+\/chart\/lab/,
-        load: getAsyncLifecycle(() => import('./patient-lab-chart/root.component'), {
-          featureName: 'patient-lab-chart-root',
-          moduleName: labliteModuleName,
-        })
-      }
+        load: getAsyncLifecycle(
+          () => import('./patient-lab-chart/root.component'),
+          {
+            featureName: 'patient-lab-chart-root',
+            moduleName: labliteModuleName,
+          },
+        ),
+      },
     ],
   }
 }

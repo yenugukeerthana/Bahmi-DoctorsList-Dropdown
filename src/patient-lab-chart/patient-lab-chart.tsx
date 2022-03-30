@@ -1,8 +1,6 @@
+import {ExtensionSlot, usePatient} from '@openmrs/esm-framework'
 import React from 'react'
 import {RouteComponentProps} from 'react-router-dom'
-import {useTranslation} from 'react-i18next'
-import {BrowserRouter, Route} from 'react-router-dom'
-import {ExtensionSlot, usePatient} from '@openmrs/esm-framework'
 import Loader from '../loader/loader.component'
 
 const styles = {
