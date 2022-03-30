@@ -1,5 +1,5 @@
 {
-    "publicUrl": "https://localhost/lab",
+    "publicUrl": "/lab",
     "frontendModules": {
       "@openmrs/esm-offline-tools-app": "latest",
       "@openmrs/esm-primary-navigation-app":"latest",

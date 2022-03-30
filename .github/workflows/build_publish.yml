@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "16.x"
+      - run: yarn build:appshell
       - run: yarn install
       - run: yarn lint
       - run: yarn typescript
