@@ -2,12 +2,16 @@
 
 Bahmni Lab Entry Micro Frontend build using OMRS 3.x
 ## Badges
-[![Node.js CI](https://github.com/bahmni/bahmni-lab-frontend/actions/workflows/main.yml/badge.svg?branch=working)](https://github.com/bahmni/bahmni-lab-frontend/actions/workflows/main.yml)
+---
 
-![Badges](badges/badge-branches.svg) ![Badges](badges/badge-functions.svg) ![Badges](badges/badge-lines.svg)
+[Bahmni Lab Entry GHA](https://github.com/Bahmni/bahmni-lab-frontend/actions)
+
+[![Build and Publish](https://github.com/Bahmni/bahmni-lab-frontend/actions/workflows/build_publish.yml/badge.svg?branch=main)](https://github.com/Bahmni/bahmni-lab-frontend/actions/workflows/build_publish.yml) ![Badges](badges/badge-branches.svg) ![Badges](badges/badge-functions.svg) ![Badges](badges/badge-lines.svg)
+
 ## Overview
+---
 
-## Built With
+### Built With
 
 * [React](https://reactjs.org/) ([TypeScript](https://www.typescriptlang.org)) - Front-end JS library
 * [Jest](https://jestjs.io/) - JS testing framework
@@ -20,6 +24,7 @@ Bahmni Lab Entry Micro Frontend build using OMRS 3.x
 * [Github Actions](https://travis-ci.org/) - CI service
 
 ## Installation
+---
 
 ### Prerequisites
 
@@ -39,22 +44,27 @@ git clone https://github.com/bahmni/bahmni-lab-frontend.git
 ```sh
 yarn install
 ```
-
-3. Run the module from `localhost:8080`.
-
-```sh
-yarn serve
+3. Build the openmrs appshell with required [configurations](./config/config.json) at [omrs-app-shell](./omrs-app-shell) directory.
+```sh 
+yarn omrs:appshell
 ```
 
-4. Run the App  `localhost:8080`.
-
+4. Assemble the earlier built openmrs modules with the following [spa build configurations](./config/spa-build-config.json).
 ```sh
-yarn start
+yarn omrs:assemble
 ```
 
-## Deployment
+5. Combine Bahmni Lab application and assembled openmrs modules.
+```sh
+yarn importmap
+```
 
-Currently, available releases for this module:
+6. Build the dist folder
+```sh
+yarn build
+```
 
-## License
+## Docker Images
+---
 
+ * Latest image of Bahmni Lab Entry can be pulled from [here](https://hub.docker.com/r/bahmni/bahmni-lab).  
