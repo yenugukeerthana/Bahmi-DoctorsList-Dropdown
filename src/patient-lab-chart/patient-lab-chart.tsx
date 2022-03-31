@@ -44,7 +44,6 @@ const PatientLabChart: React.FC<RouteComponentProps<PatientLabChartParams>> = ({
   //           />
   //   </aside>
   // );
-
   return (
     <main style={{margin: 'auto', width: '50%'}}>
       {isLoading ? (
