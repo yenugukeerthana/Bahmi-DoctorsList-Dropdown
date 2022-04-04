@@ -42,6 +42,7 @@ describe('Patient lab chart', () => {
         location={undefined}
       />,
     )
+    expect(screen.queryByText(/loading \.\.\./i)).not.toBeInTheDocument()
     expect(
       screen.getByText(/Something went wrong: unable to fetch patient data/i),
     ).toBeInTheDocument()
@@ -68,6 +69,7 @@ describe('Patient lab chart', () => {
         location={undefined}
       />,
     )
+    expect(screen.queryByText(/loading \.\.\./i)).not.toBeInTheDocument()
     expect(
       screen.getByText(/Extension slot name : patient\-header\-slot/i),
     ).toBeInTheDocument()
