@@ -62,7 +62,6 @@ typings/
 .next
 
 dist/
-omrs-app-shell/
 # Intellij integration
 *.iml
 

@@ -7,4 +7,3 @@ RUN cd /etc/ssl/ &&\
 
 COPY nginx-config/default.conf /etc/nginx/conf.d/
 COPY /dist /usr/share/nginx/html
-COPY /omrs-app-shell /usr/share/nginx/html
