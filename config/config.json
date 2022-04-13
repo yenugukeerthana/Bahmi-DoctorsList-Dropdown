@@ -14,5 +14,10 @@
       "alt": "Bahmni Logo",
       "name": "Bahmni"
     }
+  },
+  "@openmrs/esm-patient-search-app": {
+    "search": {
+      "hideActionsOverflow": true
+    }
   }
 }

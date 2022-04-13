@@ -1,12 +1,7 @@
 {
   "imports": {
-    "@openmrs/esm-devtools-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-devtools-app-3.2.0/openmrs-esm-devtools-app.js",
-    "@openmrs/esm-patient-banner-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-patient-banner-app-3.1.0/openmrs-esm-patient-banner-app.js",
-    "@openmrs/esm-patient-search-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-patient-search-app-3.1.0/openmrs-esm-patient-search-app.js",
-    "@openmrs/esm-primary-navigation-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-primary-navigation-app-3.2.0/openmrs-esm-primary-navigation-app.js",
-    "@openmrs/esm-offline-tools-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-offline-tools-app-3.2.0/openmrs-esm-offline-tools-app.js",
-    "@openmrs/esm-patient-registration-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-patient-registration-app-3.1.0/openmrs-esm-patient-registration-app.js",
-    "@openmrs/esm-implementer-tools-app": "http://localhost:8201/omrs-app-shell/openmrs-esm-implementer-tools-app-3.2.0/openmrs-esm-implementer-tools-app.js"
-
+    "@openmrs/esm-patient-registration-app": "https://spa-modules.nyc3.digitaloceanspaces.com/@openmrs/esm-patient-registration-app/2022-04-07_7f3d831ce5e7f6701eefc8281b5ff738b34d7f5e/openmrs-esm-patient-registration-app.js",
+    "@openmrs/esm-patient-search-app": "http://localhost:8201/omrs-apps/openmrs-esm-patient-search-app-3.1.0/openmrs-esm-patient-search-app.js",
+    "@openmrs/esm-patient-banner-app": "https://spa-modules.nyc3.digitaloceanspaces.com/@openmrs/esm-patient-banner-app/2022-04-07_1cfb81a7e72697a1ddb46ccc3b8473307d0b6068/openmrs-esm-patient-banner-app.js"
   }
 }

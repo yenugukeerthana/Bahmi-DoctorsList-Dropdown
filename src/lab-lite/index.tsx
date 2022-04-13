@@ -1,6 +1,5 @@
 import React from 'react'
 import {useTranslation} from 'react-i18next'
-import {useConfig} from '@openmrs/esm-framework'
 
 const LabLite: React.FC = () => {
   const {t} = useTranslation()

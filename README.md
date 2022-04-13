@@ -35,34 +35,59 @@ Bahmni Lab Entry Micro Frontend build using OMRS 3.x
 ### Setup
 
 1. Clone the [bahmni-lab-frontend](https://github.com/bahmni/bahmni-lab-frontend) repo.
-
-```sh
+```
 git clone https://github.com/bahmni/bahmni-lab-frontend.git
 ```
 
 2. Install dependencies in the root directory of the repo.
-```sh
+```
 yarn install
 ```
-3. Build the openmrs appshell with required [configurations](./config/config.json) at [omrs-app-shell](./omrs-app-shell) directory.
-```sh 
-yarn omrs:appshell
+
+3. Add required OpenMRS apps in [spa-build-config](./config/spa-build-config.json) with the specific version. 
+
+4. Builds the OpenMRS appshell, assembles the built OpenMRS modules and combines Bahmni Lab application and assembled OpenMRS modules   
+``` 
+yarn build:appshell
 ```
 
-4. Assemble the earlier built openmrs modules with the following [spa build configurations](./config/spa-build-config.json).
-```sh
-yarn omrs:assemble
+5. Assembles the OpenMRS modules and combines Bahmni Lab application and assembled OpenMRS modules
 ```
-
-5. Combine Bahmni Lab application and assembled openmrs modules.
-```sh
-yarn importmap
+yarn build:assemble
 ```
 
 6. Build the dist folder
-```sh
+```
 yarn build
 ```
+
+7. Copy OpenMRS modules to dist
+```
+yarn build:dist
+```
+
+### Setup for local development
+
+1. Execute the below command to bring up the application in port 8200.
+```sh
+yarn bahmni 
+```
+
+> Note :
+> - To use additional OpenMRS micro-frontends, add them in  [dev-importmap](./config/dev-importmap.json) pointing to the [CDN](https://spa-modules.nyc3.digitaloceanspaces.com/import-map.json).
+> - Make sure --config-url points to the port where served files reside.
+> - The --backend points to OpenMRS
+
+2. To add custom OpenMRS apps to the application
+ - Add folder containing build files of the custom OpenMRS application to **omrs-apps**. Ensure that the folder name follows the convention - openmrs-esm-*app name*-*version number*
+ - Check-in the **omrs-apps** folder to repo until the PR gets merged in OpenMRS.
+ - Update [dev-importmap](./config/dev-importmap.json) to point to locally served omrs-apps/openmrs-esm-*app name*-*version number*/openmrs-esm-*app name*.js
+ - Update the workflow to copy **omrs-apps** to **dist** folder after `yarn build:dist` command.
+ ```
+ run: cp -R omrs-apps/ dist/
+ ```
+ - Delete the above command from workflow and checked-in **omrs-apps** folders once the PR is merged in OpenMRS.
+
 
 ## Docker Images
 ---

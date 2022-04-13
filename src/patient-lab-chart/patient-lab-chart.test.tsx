@@ -74,7 +74,9 @@ describe('Patient lab chart', () => {
       screen.getByText(/Extension slot name : patient\-header\-slot/i),
     ).toBeInTheDocument()
     expect(
-      screen.getByText(/State : \{"patient":\{"id":"1"\},"patientuuid":"1"\}/i),
+      screen.getByText(
+        /State : \{"patient":\{"id":"1"\},"patientuuid":"1","hideActionsOverflow":true\}/i,
+      ),
     ).toBeInTheDocument()
   })
 })

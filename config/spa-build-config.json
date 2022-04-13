@@ -1,13 +1,10 @@
 {
     "publicUrl": "/lab",
     "frontendModules": {
-      "@openmrs/esm-offline-tools-app": "latest",
-      "@openmrs/esm-primary-navigation-app":"latest",
-      "@openmrs/esm-implementer-tools-app":"latest",
-      "@openmrs/esm-devtools-app":"latest",
-      "@openmrs/esm-login-app":"latest",
-      "@openmrs/esm-patient-search-app":"latest",
-      "@openmrs/esm-patient-banner-app":"latest",
-      "@openmrs/esm-patient-registration-app" :"latest"
+      "@openmrs/esm-patient-search-app":"3.1.0",
+      "@openmrs/esm-patient-banner-app":"3.1.0",
+      "@openmrs/esm-patient-registration-app" :"3.1.0",
+      "@openmrs/esm-active-visits-app" :"3.1.0",
+      "@openmrs/esm-home-app": "3.1.1"
     }
 }
