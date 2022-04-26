@@ -1,8 +1,8 @@
 import React from 'react'
 import {SWRConfig} from 'swr'
 import {BrowserRouter, Route} from 'react-router-dom'
-import {patientLabChartRoute, spaRoot} from '../constants'
-import PatientLabChart from './patient-lab-chart'
+import {patientLabDetailsRoute, spaRoot} from './constants'
+import PatientLabDetails from './patient-lab-details/patient-lab-details'
 
 const swrConfiguration = {
   // Maximum number of retries when the backend returns an error
@@ -14,7 +14,11 @@ const Root: React.FC = () => {
     <main>
       <SWRConfig value={swrConfiguration}>
         <BrowserRouter basename={spaRoot}>
-          <Route path={patientLabChartRoute} component={PatientLabChart} />
+          <Route
+            exact
+            path={patientLabDetailsRoute}
+            component={PatientLabDetails}
+          />
         </BrowserRouter>
       </SWRConfig>
     </main>
