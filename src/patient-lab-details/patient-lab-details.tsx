@@ -1,7 +1,8 @@
 import AddFilled16 from '@carbon/icons-react/lib/add/16'
 import {ExtensionSlot, usePatient} from '@openmrs/esm-framework'
+import { launchPatientWorkspace } from '@openmrs/esm-patient-common-lib'
 import {Button} from 'carbon-components-react'
-import React from 'react'
+import React, { useCallback } from 'react'
 import {RouteComponentProps} from 'react-router-dom'
 import Loader from '../loader/loader.component'
 import PaginatedTable from '../table/paginated-table'
@@ -16,6 +17,7 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
 }) => {
   const {patientUuid} = match.params
   const {isLoading, patient, error} = usePatient(patientUuid)
+  const handleClick = useCallback(()=> launchPatientWorkspace('upload-report'),[])
 
   return (
     <main className={styles.chartContainer}>
@@ -42,7 +44,9 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
           <PaginatedTable patientUuid={patientUuid} />
           <br></br>
           <br></br>
-          <Button renderIcon={AddFilled16}>Upload Report</Button>
+          <Button renderIcon={AddFilled16} 
+          onClick={handleClick}
+          >Upload Report</Button>
         </div>
       )}
     </main>
