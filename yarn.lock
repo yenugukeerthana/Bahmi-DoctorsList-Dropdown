@@ -1784,7 +1784,7 @@
   dependencies:
     lodash-es "^4.17.21"
 
-"@openmrs/esm-framework@^3.2.1-pre.1163":
+"@openmrs/esm-framework@^3.2.1-pre.1055", "@openmrs/esm-framework@^3.2.1-pre.1163":
   version "3.2.1-pre.1163"
   resolved "https://registry.yarnpkg.com/@openmrs/esm-framework/-/esm-framework-3.2.1-pre.1163.tgz#e6318eda8e90ea49be95ba0d0ceb95bbb3f3b054"
   integrity sha512-pnuJ1EocbaPoZLab2zsGgDXbRNzPs3hPMXFe/vVgHp+bd/UEQr84Qrz0RgcKy7uI1Regg/FeP1RjPyUP5cpc9A==
@@ -1817,12 +1817,13 @@
     uuid "^8.3.2"
     workbox-window "^6.1.5"
 
-"@openmrs/esm-patient-common-lib@next":
-  version "3.1.1-pre.1331"
-  resolved "https://registry.yarnpkg.com/@openmrs/esm-patient-common-lib/-/esm-patient-common-lib-3.1.1-pre.1331.tgz#8a63161ce3d6754f4196bbb2143e4331d01e83e1"
-  integrity sha512-xGOP1PgU+PIZx/gmOiCK0QgFXq0V4lZ54J5CvWdlG5HWQCywdBswalJmb+UUSOToGZvornB6i1JCi4X4YSlf8A==
+"@openmrs/esm-patient-common-lib@^3.1.1-pre.1346":
+  version "3.1.1-pre.1554"
+  resolved "https://registry.yarnpkg.com/@openmrs/esm-patient-common-lib/-/esm-patient-common-lib-3.1.1-pre.1554.tgz#2fe71081830bf1a3939653eb650c8009685ba8c0"
+  integrity sha512-VrARC6oTkZKktmXa5xf2oLWK1KfQdB79gxm7dPWBts0dSi3uLWaVOzdbrwOanc4evXHJg5LVy8VRrqhPYLB7Nw==
   dependencies:
     lodash-es "^4.17.15"
+    uuid "^8.3.2"
 
 "@openmrs/esm-react-utils@^3.2.1-pre.1163":
   version "3.2.1-pre.1163"

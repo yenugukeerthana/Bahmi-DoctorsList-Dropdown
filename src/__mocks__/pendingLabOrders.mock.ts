@@ -13,8 +13,7 @@ export const mockPendingLabOrdersResponse: LabOrdersFetchResponse = {
           links: [
             {
               rel: 'self',
-              uri:
-                'http://openmrs:8080/openmrs/ws/rest/v1/patient/efg-321',
+              uri: 'http://openmrs:8080/openmrs/ws/rest/v1/patient/efg-321',
             },
           ],
         },
@@ -24,8 +23,7 @@ export const mockPendingLabOrdersResponse: LabOrdersFetchResponse = {
           links: [
             {
               rel: 'self',
-              uri:
-                'http://openmrs:8080/openmrs/ws/rest/v1/concept/dummy-456',
+              uri: 'http://openmrs:8080/openmrs/ws/rest/v1/concept/dummy-456',
             },
           ],
         },
@@ -107,8 +105,7 @@ export const mockPendingLabOrdersResponse: LabOrdersFetchResponse = {
         links: [
           {
             rel: 'self',
-            uri:
-              'http://openmrs:8080/openmrs/ws/rest/v1/order/dummy-i-1233e',
+            uri: 'http://openmrs:8080/openmrs/ws/rest/v1/order/dummy-i-1233e',
           },
         ],
         type: 'order',
@@ -119,14 +116,14 @@ export const mockPendingLabOrdersResponse: LabOrdersFetchResponse = {
 }
 
 export const mockPendingLabOrdersErrorResponse = {
-    message: 'Data not found',
-    response: {
-      status: 404,
-      statusText: 'Not Found',
-    },
-  }
-export const mockEmptyPendingLabOrderResponse ={
-    data:{
-        results:[]
-    }
+  message: 'Data not found',
+  response: {
+    status: 404,
+    statusText: 'Not Found',
+  },
+}
+export const mockEmptyPendingLabOrderResponse = {
+  data: {
+    results: [],
+  },
 }

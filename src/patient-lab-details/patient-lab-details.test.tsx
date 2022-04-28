@@ -1,8 +1,8 @@
-import { ExtensionSlot, usePatient } from '@openmrs/esm-framework'
-import { render, screen, waitFor } from '@testing-library/react'
-import { when } from 'jest-when'
+import {ExtensionSlot, usePatient} from '@openmrs/esm-framework'
+import {render, screen, waitFor} from '@testing-library/react'
+import {when} from 'jest-when'
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 import PatientLabDetails from './patient-lab-details'
 
 const mockPatientUuid = '1'
@@ -14,21 +14,23 @@ const matchParams = {
 }
 
 describe('Patient lab details', () => {
-  it('should show loader if call for patient data is in progress', async() => {
+  it('should show loader if call for patient data is in progress', async () => {
     when(usePatient)
       .calledWith(mockPatientUuid)
       .mockReturnValue({
         isLoading: true,
       })
 
-      render(
+    render(
       <PatientLabDetails
         match={matchParams}
         history={undefined}
         location={undefined}
       />,
     )
-   await waitFor(()=>  expect(screen.getByText(/loading \.\.\./i)).toBeInTheDocument())
+    await waitFor(() =>
+      expect(screen.getByText(/loading \.\.\./i)).toBeInTheDocument(),
+    )
   })
 
   it('should show error message when usePatient call fails', () => {
@@ -37,7 +39,7 @@ describe('Patient lab details', () => {
       .mockReturnValue({
         error: {message: 'unable to fetch patient data'},
       })
-   
+
     render(
       <PatientLabDetails
         match={matchParams}
@@ -65,7 +67,7 @@ describe('Patient lab details', () => {
         </>
       )
     })
-   
+
     render(
       <BrowserRouter>
         <PatientLabDetails
@@ -90,35 +92,32 @@ describe('Patient lab details', () => {
         name: /upload report/i,
       }),
     ).toBeInTheDocument()
-
   })
 
-  it('should render Paginated Table component',()=>{
+  it('should render Paginated Table component', () => {
     when(usePatient)
-    .calledWith(mockPatientUuid)
-    .mockReturnValue({
-      patient: {id: mockPatientUuid},
+      .calledWith(mockPatientUuid)
+      .mockReturnValue({
+        patient: {id: mockPatientUuid},
+      })
+    when(ExtensionSlot).mockImplementation((props: any) => {
+      return (
+        <>
+          <div>Extension slot name : {props.extensionSlotName} </div>
+          <div>State : {JSON.stringify(props.state)}</div>
+        </>
+      )
     })
-  when(ExtensionSlot).mockImplementation((props: any) => {
-    return (
-      <>
-        <div>Extension slot name : {props.extensionSlotName} </div>
-        <div>State : {JSON.stringify(props.state)}</div>
-      </>
+
+    render(
+      <BrowserRouter>
+        <PatientLabDetails
+          match={matchParams}
+          history={undefined}
+          location={undefined}
+        />
+      </BrowserRouter>,
     )
-  })
- 
-  render(
-    <BrowserRouter>
-      <PatientLabDetails
-        match={matchParams}
-        history={undefined}
-        location={undefined}
-      />
-    </BrowserRouter>,
-  )
-  expect(screen.getByTitle(/paginated-table/i)).toBeInTheDocument()
+    expect(screen.getByTitle(/paginated-table/i)).toBeInTheDocument()
   })
 })
-
-

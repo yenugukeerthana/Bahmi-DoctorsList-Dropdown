@@ -28,23 +28,26 @@ describe('Patient lab details', () => {
     const mockedOpenmrsFetch = openmrsFetch as jest.Mock
     mockedOpenmrsFetch.mockReturnValue(mockPendingLabOrdersResponse)
     when(usePagination)
-      .calledWith([
-        {
-          id: 'abc-123',
-          testName: 'Routine Blood',
-          date: 'April 19, 2022',
-          orderedBy: 'Test Orderer'
-        }
-      ], 5)
+      .calledWith(
+        [
+          {
+            id: 'abc-123',
+            testName: 'Routine Blood',
+            date: 'April 19, 2022',
+            orderedBy: 'Test Orderer',
+          },
+        ],
+        5,
+      )
       .mockReturnValue({
         results: [
-            {
-              id: 'abc-123',
-              testName: 'Routine Blood',
-              date: 'April 19, 2022',
-              orderedBy: 'Test Orderer'
-            }
-          ],
+          {
+            id: 'abc-123',
+            testName: 'Routine Blood',
+            date: 'April 19, 2022',
+            orderedBy: 'Test Orderer',
+          },
+        ],
         goTo: jest.fn(),
         currentPage: 1,
       })

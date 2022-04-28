@@ -67,11 +67,11 @@
     "swr": "^1.1.2"
   },
   "devDependencies": {
-    "@openmrs/esm-framework": "^3.2.1-pre.1163",
     "@swc/core": "^1.2.165",
     "@swc/jest": "^0.2.20",
     "@swc/cli": "^0.1.57",
-    "@openmrs/esm-patient-common-lib": "next",
+    "@openmrs/esm-framework": "^3.2.1-pre.1055",
+    "@openmrs/esm-patient-common-lib": "^3.1.1-pre.1346",
     "@testing-library/dom": "^7.20.0",
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/react": "^10.4.3",
