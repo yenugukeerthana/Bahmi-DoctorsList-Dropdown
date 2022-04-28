@@ -130,6 +130,7 @@
     "sass-loader": "^10.0.2",
     "style-loader": "^1.0.0",
     "swr": "^1.1.2",
+    "ts-loader" : "9.2.9",
     "typescript": "^4.0.3",
     "unistore": "^3.5.2",
     "webpack": "^5.37.0",
