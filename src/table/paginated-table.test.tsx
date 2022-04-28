@@ -89,7 +89,7 @@ describe('Patient lab details', () => {
         name: /select row/i,
       }).length,
     ).toEqual(1)
-    expect(screen.getByTestId(/paginate-table/i)).toBeInTheDocument()
+    expect(screen.getByText(/1 \/ 1 items/i)).toBeInTheDocument()
 
     expect(
       screen.queryByText(
@@ -118,7 +118,7 @@ describe('Patient lab details', () => {
     })
     expect(screen.queryByText('Pending lab orders')).not.toBeInTheDocument()
     expect(screen.queryByTitle(/lab-order-table/i)).not.toBeInTheDocument()
-    expect(screen.queryByTestId(/paginate-table/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/1 \/ 1 items/i)).not.toBeInTheDocument()
   })
   it('should not display pending lab orders table when there is no open orders', async () => {
     const mockedOpenmrsFetch = openmrsFetch as jest.Mock
@@ -136,7 +136,7 @@ describe('Patient lab details', () => {
       expect(screen.queryByText('Pending lab orders')).not.toBeInTheDocument()
     })
     expect(screen.queryByTitle(/lab-order-table/i)).not.toBeInTheDocument()
-    expect(screen.queryByTestId(/paginate-table/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/1 \/ 1 items/i)).not.toBeInTheDocument()
     expect(
       screen.queryByText(
         /Something went wrong in fetching pending lab orders\.\.\./i,

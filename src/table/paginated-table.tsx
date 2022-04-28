@@ -1,4 +1,5 @@
 import {usePagination} from '@openmrs/esm-framework'
+import {PatientChartPagination} from '@openmrs/esm-patient-common-lib'
 import {
   DataTable,
   Table,
@@ -9,7 +10,6 @@ import {
   TableBody,
   TableSelectRow,
   TableCell,
-  Pagination,
 } from 'carbon-components-react'
 import React, {useMemo} from 'react'
 import useSWR from 'swr'
@@ -80,14 +80,12 @@ const PaginatedTable = ({patientUuid}) => {
                 </Table>
               )}
             </DataTable>
-            <Pagination
-              data-testid="paginate-table"
-              size="md"
-              page={currentPage}
+            <PatientChartPagination
+              pageNumber={currentPage}
               pageSize={defaultPageSize}
-              pageSizes={[defaultPageSize]}
+              currentItems={paginatedPendingLabOrders?.length}
               totalItems={rows?.length}
-              onChange={({page}) => {
+              onPageNumberChange={({page}) => {
                 goTo(page)
               }}
             />
