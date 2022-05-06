@@ -1,0 +1,9 @@
+@import "~@openmrs/esm-styleguide/src/vars";
+@import "~carbon-components/src/globals/scss/vars";
+
+.buttonsGroup {
+    width: 100%; 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
