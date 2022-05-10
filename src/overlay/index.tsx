@@ -19,7 +19,10 @@ const Overlay: React.FC<OverlayProps> = ({
   const isDesktop = useLayoutType() === 'desktop'
 
   return (
-    <div className={isDesktop ? styles.desktopOverlay : styles.tabletOverlay}>
+    <div
+      className={isDesktop ? styles.desktopOverlay : styles.tabletOverlay}
+      data-testid="overlay"
+    >
       {isDesktop ? (
         <div className={styles.desktopHeader}>
           <div className={styles.headerContent}>{header}</div>
@@ -28,13 +31,17 @@ const Overlay: React.FC<OverlayProps> = ({
             onClick={close}
             kind="ghost"
             hasIconOnly
+            aria-label="close-icon"
           >
             <Close16 />
           </Button>
         </div>
       ) : (
-        <Header className={styles.tabletOverlayHeader}>
-          <Button onClick={close} hasIconOnly>
+        <Header
+          className={styles.tabletOverlayHeader}
+          aria-label="overlay-header"
+        >
+          <Button onClick={close} hasIconOnly aria-label="arrow-icon">
             <ArrowLeft16 onClick={close} />
           </Button>
           <div className={styles.headerContent}>{header}</div>
