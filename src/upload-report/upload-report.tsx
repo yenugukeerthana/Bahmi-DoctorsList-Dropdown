@@ -4,75 +4,77 @@ import {
   DatePickerInput,
   TextArea,
 } from 'carbon-components-react'
+import dayjs from 'dayjs'
 import React, {useState} from 'react'
 import Overlay from '../overlay'
-
+import styles from './upload-report.scss'
 interface UploadReportProps {
-  closeWorkspace(): void
-  patientUuid: string
-}
-interface OverlayProps {
   close: () => void
   header: string
-  buttonsGroup?: React.ReactElement
 }
 
-const UploadReport: React.FC<OverlayProps> = ({close, header}) => {
+const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
   const locale: Object = localStorage.getItem('i18nextLng')
-  const currentDate: string = new Date().toLocaleDateString(locale.toString())
-  const [reportDate, setReportDate] = useState<number>()
-  const [reviewComments, setReviewComments] = useState<string>()
-
-  console.log(reportDate)
+  const currentDate: string = dayjs().format('MM/DD/YYYY')
+  const [reportDate, setReportDate] = useState<number>(null)
+  const [reportConclusion, setReportConclusion] = useState<string>()
+  const maxCount: number = 500
 
   const handleDiscard = () => {
-    setReportDate(undefined)
-    setReviewComments('')
+    setReportDate(null)
+    setReportConclusion('')
   }
 
-  const handleSave = () =>
-    console.log('Report date', reportDate, ' Review Comments', reviewComments)
+  const handleSave = () => {
+    console.log(
+      'Report date',
+      reportDate,
+      ' Review Comments',
+      reportConclusion,
+    ),
+      close()
+  }
 
   const renderButtonGroup = () => (
-    <>
+    <div className={styles.overlayButtons}>
       <Button onClick={handleDiscard} kind="secondary" size="lg">
         Discard
       </Button>
-      <Button onClick={handleSave} size="lg">
+      <Button onClick={handleSave} size="lg" disabled={!reportDate}>
         Save and Upload
       </Button>
-    </>
+    </div>
   )
 
   return (
-    <>
-      <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
-        <DatePicker
-          datePickerType="single"
-          locale={locale}
-          short={true}
-          value={reportDate}
-          maxDate={currentDate}
-          onChange={(selectedDate: Date[]) =>
-            setReportDate(Date.parse(selectedDate[0].toString()))
-          }
-        >
-          <DatePickerInput
-            placeholder="mm/dd/yyyy"
-            labelText="Report Date"
-            id="reportDate"
-          />
-        </DatePicker>
-
-        <TextArea
-          labelText={'Review Comments'}
-          maxCount={10}
-          enableCounter={true}
-          value={reviewComments}
-          onChange={e => setReviewComments(e.target.value)}
+    <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
+      <DatePicker
+        datePickerType="single"
+        locale={locale}
+        short={true}
+        value={reportDate}
+        maxDate={currentDate}
+        onChange={(selectedDate: Date[]) =>
+          setReportDate(Date.parse(selectedDate[0].toString()))
+        }
+        allowInput = {false}
+      >
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Report Date"
+          id="reportDate"
         />
-      </Overlay>
-    </>
+      </DatePicker>
+
+      <TextArea
+        labelText={'Report Conclusion'}
+        maxCount={maxCount}
+        enableCounter={true}
+        required={true}
+        value={reportConclusion}
+        onChange={e => setReportConclusion(e.target.value)}
+      />
+    </Overlay>
   )
 }
 

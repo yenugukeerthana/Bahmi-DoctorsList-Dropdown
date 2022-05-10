@@ -5,6 +5,7 @@ import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
 import {SWRConfig} from 'swr'
 import {headers} from '../constants'
+import { localStorageMock } from '../utils/test-utils'
 import {
   mockEmptyPendingLabOrderResponse,
   mockPendingLabOrdersErrorResponse,
@@ -14,7 +15,7 @@ import PaginatedTable from './paginated-table'
 
 const mockPatientUuid = '1'
 
-describe('Patient lab details', () => {
+describe('Paginated Table', () => {
   beforeEach(() => {
     Object.defineProperty(window, 'localStorage', {value: localStorageMock})
     when(openmrsFetch).mockImplementation(() => jest.fn())
@@ -145,24 +146,3 @@ describe('Patient lab details', () => {
   })
 })
 
-const localStorageMock = (function() {
-  let store = {}
-
-  return {
-    getItem(key) {
-      return store[key]
-    },
-
-    setItem(key, value) {
-      store[key] = value
-    },
-
-    clear() {
-      store = {}
-    },
-
-    removeItem(key) {
-      delete store[key]
-    },
-  }
-})()
