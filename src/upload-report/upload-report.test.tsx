@@ -19,7 +19,7 @@ describe('Upload Report', () => {
 
     render(<UploadReport close={close} header={'Test Header'} />)
 
-    userEvent.click(screen.getByLabelText('close'))
+    userEvent.click(screen.getByLabelText('close-icon'))
 
     expect(close).toBeCalled()
   })

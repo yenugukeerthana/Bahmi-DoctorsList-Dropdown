@@ -57,7 +57,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
         onChange={(selectedDate: Date[]) =>
           setReportDate(Date.parse(selectedDate[0].toString()))
         }
-        allowInput = {false}
+        allowInput={false}
       >
         <DatePickerInput
           placeholder="mm/dd/yyyy"
