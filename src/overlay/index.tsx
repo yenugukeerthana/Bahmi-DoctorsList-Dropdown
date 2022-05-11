@@ -21,7 +21,7 @@ const Overlay: React.FC<OverlayProps> = ({
   return (
     <div
       className={isDesktop ? styles.desktopOverlay : styles.tabletOverlay}
-      data-testid="overlay"
+      aria-label="overlay"
     >
       {isDesktop ? (
         <div className={styles.desktopHeader}>

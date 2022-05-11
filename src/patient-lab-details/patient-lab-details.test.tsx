@@ -153,6 +153,6 @@ describe('Patient lab details', () => {
     userEvent.click(screen.getByRole('button', {name: /upload report/i}))
    
 
-    expect(screen.getByTestId(/overlay/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/overlay/i)).toBeInTheDocument()
   })
 })

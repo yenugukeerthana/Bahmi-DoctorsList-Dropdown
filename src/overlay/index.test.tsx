@@ -17,6 +17,7 @@ describe('Overlay', () => {
     render(<Overlay close={close} header={'Test Header'} />)
 
     expect(screen.getByLabelText(/close-icon/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/close-icon/i).getElementsByTagName('svg')).toBeTruthy()
 
     userEvent.click(screen.getByLabelText(/close-icon/i))
 
@@ -31,14 +32,13 @@ describe('Overlay', () => {
     render(<Overlay close={close} header={'Test Header'} />)
 
     expect(screen.getByLabelText(/arrow-icon/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/arrow-icon/i).getElementsByTagName('svg')).toBeTruthy()
 
     userEvent.click(screen.getByLabelText(/arrow-icon/i))
 
     expect(close).toBeCalled()
   })
   it('should render children and button group when passed', () => {
-    const close = jest.fn()
-
     const children = <h1> Overlay Children </h1>
     const buttonsGroup = <Button>Overlay Button Group</Button>
 
@@ -47,7 +47,7 @@ describe('Overlay', () => {
 
     render(
       <Overlay
-        close={close}
+        close={jest.fn()}
         header={'Test Header'}
         children={children}
         buttonsGroup={buttonsGroup}
