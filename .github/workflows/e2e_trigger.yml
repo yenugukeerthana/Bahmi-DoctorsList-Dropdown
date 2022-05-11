@@ -7,7 +7,7 @@ on:
 env:
   ORG_NAME: Bahmni
   EVENT_TYPE: bahmni-next-trigger
-  TEST_COMMAND: "npm run next"
+  TEST_COMMAND: "npm run lablite"
 
 jobs:
   trigger-e2e:
