@@ -7,14 +7,14 @@
   top: $spacing-09;
   right: 0;
   height: calc(100vh - 3rem);
-  min-width: 27rem;
   max-width: 100%;
   background-color: $ui-02;
   border-left: 1px solid $text-03;
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  z-index: 999;
+  z-index: 0;
+  width: 30%;
 }
 
 .tabletOverlay {

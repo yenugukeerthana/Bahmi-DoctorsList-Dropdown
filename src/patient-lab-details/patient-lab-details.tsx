@@ -22,7 +22,13 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
   const handleClick = () => setOnButtonClick(true)
 
   return (
-    <main className={styles.chartContainer}>
+    <main
+      className={
+        onButtonClick
+          ? styles.patientDetailsContainerWithSidePanel
+          : styles.patientDetailsContainer
+      }
+    >
       {isLoading ? (
         <Loader />
       ) : error ? (

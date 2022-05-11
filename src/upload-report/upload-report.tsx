@@ -17,7 +17,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
   const locale: Object = localStorage.getItem('i18nextLng')
   const currentDate: string = dayjs().format('MM/DD/YYYY')
   const [reportDate, setReportDate] = useState<number>(null)
-  const [reportConclusion, setReportConclusion] = useState<string>()
+  const [reportConclusion, setReportConclusion] = useState<string>('')
   const maxCount: number = 500
 
   const handleDiscard = () => {
@@ -65,15 +65,23 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
           id="reportDate"
         />
       </DatePicker>
-
-      <TextArea
-        labelText={'Report Conclusion'}
-        maxCount={maxCount}
-        enableCounter={true}
-        required={true}
-        value={reportConclusion}
-        onChange={e => setReportConclusion(e.target.value)}
-      />
+      <div style={{paddingTop: '1rem'}}>
+        <TextArea
+          labelText={
+            <>
+              Report Conclusion{' '}
+              <span
+                className={styles.counter}
+                id="counter"
+              >{`${reportConclusion?.length}/${maxCount}`}</span>
+            </>
+          }
+          maxCount={maxCount}
+          required={true}
+          value={reportConclusion}
+          onChange={e => setReportConclusion(e.target.value)}
+        />
+      </div>
     </Overlay>
   )
 }
