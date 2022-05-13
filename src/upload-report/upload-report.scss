@@ -1,0 +1,25 @@
+@import "~@openmrs/esm-styleguide/src/vars";
+@import "~carbon-components/src/globals/scss/vars";
+@import 'carbon-components/scss/globals/scss/typography.scss';
+
+.buttonsGroup {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+
+.overlayButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.overlayButtons button {
+  max-width: unset;
+}
+
+.counter {
+  position: absolute;
+  right: 0;
+  padding-right: 1.2rem
+}

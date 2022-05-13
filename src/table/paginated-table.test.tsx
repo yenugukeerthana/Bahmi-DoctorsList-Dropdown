@@ -5,6 +5,7 @@ import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
 import {SWRConfig} from 'swr'
 import {headers} from '../constants'
+import { localStorageMock } from '../utils/test-utils'
 import {
   mockEmptyPendingLabOrderResponse,
   mockPendingLabOrdersErrorResponse,
@@ -14,7 +15,7 @@ import PaginatedTable from './paginated-table'
 
 const mockPatientUuid = '1'
 
-describe('Patient lab details', () => {
+describe('Paginated Table', () => {
   beforeEach(() => {
     Object.defineProperty(window, 'localStorage', {value: localStorageMock})
     when(openmrsFetch).mockImplementation(() => jest.fn())
@@ -28,23 +29,26 @@ describe('Patient lab details', () => {
     const mockedOpenmrsFetch = openmrsFetch as jest.Mock
     mockedOpenmrsFetch.mockReturnValue(mockPendingLabOrdersResponse)
     when(usePagination)
-      .calledWith([
-        {
-          id: 'abc-123',
-          testName: 'Routine Blood',
-          date: 'April 19, 2022',
-          orderedBy: 'Test Orderer'
-        }
-      ], 5)
+      .calledWith(
+        [
+          {
+            id: 'abc-123',
+            testName: 'Routine Blood',
+            date: 'April 19, 2022',
+            orderedBy: 'Test Orderer',
+          },
+        ],
+        5,
+      )
       .mockReturnValue({
         results: [
-            {
-              id: 'abc-123',
-              testName: 'Routine Blood',
-              date: 'April 19, 2022',
-              orderedBy: 'Test Orderer'
-            }
-          ],
+          {
+            id: 'abc-123',
+            testName: 'Routine Blood',
+            date: 'April 19, 2022',
+            orderedBy: 'Test Orderer',
+          },
+        ],
         goTo: jest.fn(),
         currentPage: 1,
       })
@@ -86,7 +90,7 @@ describe('Patient lab details', () => {
         name: /select row/i,
       }).length,
     ).toEqual(1)
-    expect(screen.getByTestId(/paginate-table/i)).toBeInTheDocument()
+    expect(screen.getByText(/1 \/ 1 items/i)).toBeInTheDocument()
 
     expect(
       screen.queryByText(
@@ -115,7 +119,7 @@ describe('Patient lab details', () => {
     })
     expect(screen.queryByText('Pending lab orders')).not.toBeInTheDocument()
     expect(screen.queryByTitle(/lab-order-table/i)).not.toBeInTheDocument()
-    expect(screen.queryByTestId(/paginate-table/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/1 \/ 1 items/i)).not.toBeInTheDocument()
   })
   it('should not display pending lab orders table when there is no open orders', async () => {
     const mockedOpenmrsFetch = openmrsFetch as jest.Mock
@@ -133,7 +137,7 @@ describe('Patient lab details', () => {
       expect(screen.queryByText('Pending lab orders')).not.toBeInTheDocument()
     })
     expect(screen.queryByTitle(/lab-order-table/i)).not.toBeInTheDocument()
-    expect(screen.queryByTestId(/paginate-table/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/1 \/ 1 items/i)).not.toBeInTheDocument()
     expect(
       screen.queryByText(
         /Something went wrong in fetching pending lab orders\.\.\./i,
@@ -142,24 +146,3 @@ describe('Patient lab details', () => {
   })
 })
 
-const localStorageMock = (function() {
-  let store = {}
-
-  return {
-    getItem(key) {
-      return store[key]
-    },
-
-    setItem(key, value) {
-      store[key] = value
-    },
-
-    clear() {
-      store = {}
-    },
-
-    removeItem(key) {
-      delete store[key]
-    },
-  }
-})()

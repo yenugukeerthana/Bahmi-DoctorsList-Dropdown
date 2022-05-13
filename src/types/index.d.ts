@@ -25,8 +25,8 @@ export interface LabOrders {
   resourceVersion: string
 }
 export interface LabOrdersFetchResponse {
-    data: {results :Array<LabOrders>}
-  }
+  data: {results: Array<LabOrders>}
+}
 interface GeneralInfo {
   uuid: string
   display: string

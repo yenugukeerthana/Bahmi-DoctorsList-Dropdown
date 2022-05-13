@@ -1,10 +1,11 @@
 import AddFilled16 from '@carbon/icons-react/lib/add/16'
 import {ExtensionSlot, usePatient} from '@openmrs/esm-framework'
 import {Button} from 'carbon-components-react'
-import React from 'react'
+import React, {useState} from 'react'
 import {RouteComponentProps} from 'react-router-dom'
 import Loader from '../loader/loader.component'
 import PaginatedTable from '../table/paginated-table'
+import UploadReport from '../upload-report/upload-report'
 import styles from './patient-lab-details.scss'
 
 interface PatientParamsType {
@@ -16,9 +17,18 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
 }) => {
   const {patientUuid} = match.params
   const {isLoading, patient, error} = usePatient(patientUuid)
+  const [onButtonClick, setOnButtonClick] = useState(false)
+
+  const handleClick = () => setOnButtonClick(true)
 
   return (
-    <main className={styles.chartContainer}>
+    <main
+      className={
+        onButtonClick
+          ? styles.patientDetailsContainerWithSidePanel
+          : styles.patientDetailsContainer
+      }
+    >
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -42,7 +52,15 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
           <PaginatedTable patientUuid={patientUuid} />
           <br></br>
           <br></br>
-          <Button renderIcon={AddFilled16}>Upload Report</Button>
+          <Button renderIcon={AddFilled16} onClick={handleClick}>
+            Upload Report
+          </Button>
+          {onButtonClick && (
+            <UploadReport
+              close={() => setOnButtonClick(false)}
+              header="Upload Report"
+            />
+          )}
         </div>
       )}
     </main>
