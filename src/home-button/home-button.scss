@@ -1,0 +1,7 @@
+@import "~@openmrs/esm-styleguide/src/vars";
+.headerGlobalBarButton {
+    @include brand-01(background-color);
+    .home {
+      color: white;
+    }
+}

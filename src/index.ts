@@ -54,6 +54,16 @@ function setupOpenMRS() {
         }),
       },
     ],
+    extensions: [
+      {
+        name: 'home-button',
+        load: getAsyncLifecycle(
+          () => import('./home-button/home-button'),
+          options,
+        ),
+        slot: 'top-nav-info-slot',
+      },
+    ],
   }
 }
 
