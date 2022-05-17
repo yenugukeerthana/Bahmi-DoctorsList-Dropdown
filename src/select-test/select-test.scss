@@ -1,0 +1,13 @@
+@import "~@openmrs/esm-styleguide/src/vars";
+@import "~carbon-components/src/globals/scss/vars";
+@import "~carbon-components/src/globals/scss/mixins";
+
+.comboBox {
+    padding: 1rem 0 1rem 0;
+    :global(.bx--list-box--expanded .bx--list-box__menu) {
+        max-height: fit-content !important;
+    }
+    :global(.bx--multi-select .bx--tag){
+        display: none;
+    }
+}

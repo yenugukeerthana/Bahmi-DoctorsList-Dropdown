@@ -2,14 +2,12 @@ import {
   Button,
   DatePicker,
   DatePickerInput,
-  TextArea,
+  TextArea
 } from 'carbon-components-react'
 import dayjs from 'dayjs'
-import React, {useState} from 'react'
-import useSWR from 'swr'
+import React, { useState } from 'react'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
-import {fetcher, getLabTests} from '../utils/lab-orders'
 import styles from './upload-report.scss'
 interface UploadReportProps {
   close: () => void
@@ -22,11 +20,6 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
   const [reportDate, setReportDate] = useState<number>(null)
   const [reportConclusion, setReportConclusion] = useState<string>('')
   const maxCount: number = 500
-
-  const {data: labTestResults, error: labTestResultsError} = useSWR<any, Error>(
-    getLabTests,
-    fetcher,
-  )
 
   const handleDiscard = () => {
     setReportDate(null)
@@ -56,7 +49,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
 
   return (
     <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
-      <SelectTest labTestResults={labTestResults} />
+      <SelectTest />
       <DatePicker
         datePickerType="single"
         locale={locale}
@@ -76,6 +69,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
           />
         </label>
       </DatePicker>
+
       <div style={{paddingTop: '1rem'}}>
         <TextArea
           labelText={
