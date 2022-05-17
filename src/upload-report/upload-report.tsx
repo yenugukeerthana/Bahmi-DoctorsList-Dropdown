@@ -68,11 +68,13 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
         }
         allowInput={false}
       >
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Report Date"
-          id="reportDate"
-        />
+        <label  id="reportDateLabel" >
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Report Date"
+            id="reportDate"
+          />
+        </label>
       </DatePicker>
       <div style={{paddingTop: '1rem'}}>
         <TextArea
@@ -85,7 +87,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
               >{`${reportConclusion?.length}/${maxCount}`}</span>
             </>
           }
-          maxCount={maxCount}
+          maxLength={maxCount}
           required={true}
           value={reportConclusion}
           onChange={e => setReportConclusion(e.target.value)}
