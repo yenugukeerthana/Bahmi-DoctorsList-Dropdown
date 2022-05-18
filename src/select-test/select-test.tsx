@@ -1,13 +1,18 @@
-import {MultiSelect, Search} from 'carbon-components-react'
+import {
+  Accordion,
+  AccordionItem,
+  Checkbox,
+  Search,
+} from 'carbon-components-react'
 import React, {useEffect, useState} from 'react'
 import useSWR from 'swr'
 import {fetcher, getLabTests} from '../utils/lab-orders'
-import styles from './select-test.scss'
 
 const SelectTest = () => {
   const [searchResults, setSearchResults] = useState<Array<any>>([])
   const [selectedTests, setSelectedTests] = useState<Array<any>>([])
   const [totalTest, setTotalTest] = useState<Array<any>>([])
+  const [searchValue, setSearchValue] = useState<string>()
 
   const {data: labTestResults, error: labTestResultsError} = useSWR<any, Error>(
     getLabTests,
@@ -29,63 +34,106 @@ const SelectTest = () => {
       })
   }, [labTestResults])
 
-  const handleSearch = e => {
-    const temp = [
-      ...totalTest.filter(test =>
-        test.name?.display
-          ?.toLowerCase()
-          .includes(e.target.value?.toLowerCase()),
-      ),
-    ]
+  useEffect(() => {
+    if (searchValue) {
+      const filteredTests = totalTest.filter(test =>
+        test.name?.display?.toLowerCase().includes(searchValue.toLowerCase()),
+      )
+      filterUnselectedTests(filteredTests)
+    } else {
+      setSearchResults([...totalTest])
+    }
+  }, [searchValue])
 
-    const tests = [
-      ...temp.filter(item =>
+  const filterUnselectedTests = filteredTests => {
+    if (selectedTests.length > 0) {
+      const tests = filteredTests.filter(item =>
         selectedTests.find(
           element => element?.name?.display !== item?.name?.display,
         ),
-      ),
-    ]
-    setSearchResults(tests.length > 0 ? [...tests] : [...totalTest])
+      )
+      setSearchResults([...tests])
+    } else setSearchResults([...filteredTests])
   }
 
   const handleClear = () => {
-    const tests = [
-      ...totalTest.filter(item =>
+    if (selectedTests.length > 0) {
+      const tests = totalTest.filter(item =>
         selectedTests.find(
           element => element?.name?.display !== item?.name?.display,
         ),
-      ),
-    ]
-    setSearchResults([...tests])
+      )
+      setSearchResults([...tests])
+    } else setSearchResults([...totalTest])
   }
 
-  const handleSelect = selectedtemsArray => {
-    const lengthOfSelectedTest = selectedtemsArray?.selectedItems?.length - 1
-    setSelectedTests([...selectedtemsArray?.selectedItems])
-    setSearchResults([
-      ...searchResults.filter(
-        item =>
-          selectedtemsArray?.selectedItems[lengthOfSelectedTest]?.name
-            ?.display !== item?.name?.display,
+  const handleSelect = selectedItem => {
+    setSelectedTests([...selectedTests, selectedItem])
+    setSearchResults(
+      searchResults.filter(
+        selectedResult => selectedResult.name.uuid !== selectedItem.name.uuid,
       ),
-    ])
+    )
   }
 
-  const handleUnSelect = selectedItemsArray => {
-    const lengthOfSelectedItem = selectedItemsArray?.selectedItems?.length - 1
-    setSearchResults(searchResults => [
-      ...searchResults,
-      selectedItemsArray?.selectedItems[lengthOfSelectedItem],
-    ])
+  const handleUnSelect = selectedTest => {
+    if (
+      selectedTest.name.display
+        .toLowerCase()
+        .includes(searchValue?.toLowerCase())
+    )
+      setSearchResults(searchResults => [...searchResults, selectedTest])
 
-    setSelectedTests([
-      ...selectedTests.filter(
-        item =>
-          item?.name?.display !==
-          selectedItemsArray?.selectedItems[lengthOfSelectedItem]?.name
-            ?.display,
+    setSelectedTests(
+      selectedTests.filter(
+        item => item?.name?.display !== selectedTest?.name?.display,
       ),
-    ])
+    )
+  }
+
+  const showSearchCount = () => {
+    if (searchResults.length > 0)
+      return (
+        <p>
+          {searchResults.length} items matching "{searchValue}"
+        </p>
+      )
+    return 'No matching tests found'
+  }
+
+  const renderSearchResults = () => {
+    return (
+      <div>
+        <div>{searchValue && showSearchCount()}</div>
+
+        {searchResults.map((searchResult, index) => (
+          <Checkbox
+            id={searchResult.name.uuid}
+            key={`${searchResult.name.uuid}${index}`}
+            labelText={searchResult.name.display}
+            onChange={() => handleSelect(searchResult)}
+          />
+        ))}
+      </div>
+    )
+  }
+
+  const renderSelectedTests = () => {
+    if (selectedTests.length == 0)
+      return <div>You have not selected any tests</div>
+    return (
+      <div>
+        {selectedTests.map((selectedTest, index) => (
+          <Checkbox
+            id={selectedTest.name.uuid}
+            checked={true}
+            key={`${selectedTest.name.uuid} ${index}`}
+            labelText={selectedTest.name.display}
+            onChange={() => handleUnSelect(selectedTest)}
+          />
+        ))}
+      </div>
+    )
   }
 
   return (
@@ -93,31 +141,26 @@ const SelectTest = () => {
       <h3>Select Tests</h3>
       <Search
         labelText="search"
-        onChange={handleSearch}
+        value={searchValue}
+        onChange={e => {
+          setSearchValue(e.target.value)
+        }}
         onClear={handleClear}
       />
 
-      <div className={styles.comboBox}>
-        <MultiSelect
-          id="carbon-multiselect-example"
-          itemToString={item => item?.name?.display?.toString()}
-          items={searchResults}
-          onChange={selectedItem => handleSelect(selectedItem)}
-          titleText={`Available tests (${totalTest.length})`}
-          light
-        />
+      <Accordion>
+        <AccordionItem
+          title={`Available Tests ( ${totalTest.length} )`}
+          open={true}
+          children={renderSearchResults()}
+        ></AccordionItem>
 
-        <MultiSelect
-          id="default"
-          size={'xl'}
-          light
-          items={selectedTests}
-          titleText={`Selected tests (${selectedTests.length})`}
-          itemToString={item => item?.name?.display?.toString()}
-          onChange={selectedItem => handleUnSelect(selectedItem)}
-          open={selectedTests.length > 0 ? true : false}
-        />
-      </div>
+        <AccordionItem
+          title={`Selected Tests ( ${selectedTests.length} )`}
+          open={true}
+          children={renderSelectedTests()}
+        ></AccordionItem>
+      </Accordion>
     </>
   )
 }
