@@ -51,6 +51,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
     <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
       <SelectTest />
       <DatePicker
+        className={styles.datePicker}
         datePickerType="single"
         locale={locale}
         short={true}

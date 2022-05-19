@@ -10,7 +10,7 @@
   max-width: 100%;
   background-color: $ui-02;
   border-left: 1px solid $text-03;
-  overflow: hidden;
+  overflow: visible;
   display: grid;
   grid-template-rows: auto 1fr auto;
   z-index: 0;
