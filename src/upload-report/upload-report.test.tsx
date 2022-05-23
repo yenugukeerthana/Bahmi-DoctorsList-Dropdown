@@ -1,8 +1,10 @@
-import {useLayoutType} from '@openmrs/esm-framework'
-import {render, screen} from '@testing-library/react'
+import {openmrsFetch, useLayoutType} from '@openmrs/esm-framework'
+import {render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
+import {SWRConfig} from 'swr'
 import {localStorageMock} from '../utils/test-utils'
+import {mockLabTestsResponse} from '../__mocks__/selectTests.mock'
 import UploadReport from './upload-report'
 
 describe('Upload Report', () => {
@@ -87,14 +89,20 @@ describe('Upload Report', () => {
     expect(currentDay.className).not.toMatch(/-disabled/i)
     expect(futureDate.className).toMatch(/-disabled/i)
   })
-  it('should disable save and upload button until report date is entered', async () => {
+  it('should disable save and upload button until report date, selected test is entered', async () => {
     localStorage.setItem('i18nextLng', 'en')
     const close = jest.fn()
+    const mockedOpenmrsFetch = openmrsFetch as jest.Mock
+    mockedOpenmrsFetch.mockResolvedValue(mockLabTestsResponse)
 
     const mockedLayout = useLayoutType as jest.Mock
     mockedLayout.mockReturnValue('desktop')
 
-    render(<UploadReport close={close} header={'Test Header'} />)
+    render(
+      <SWRConfig value={{provider: () => new Map()}}>
+        <UploadReport close={close} header={'Test Header'} />
+      </SWRConfig>,
+    )
 
     expect(
       screen.getByRole('button', {name: /save and upload/i}),
@@ -110,10 +118,17 @@ describe('Upload Report', () => {
 
     userEvent.click(screen.getByLabelText(currentDay))
 
-    expect(
-        screen.getByRole('button', {name: /save and upload/i}),
-      ).not.toBeDisabled()
+    await waitFor(() =>
+      expect(screen.queryByText(/loading \.\.\./i)).not.toBeInTheDocument(),
+    )
 
+    userEvent.click(
+      screen.getByRole('checkbox', {name: /Absolute Eosinphil Count/i}),
+    )
+
+    expect(
+      screen.getByRole('button', {name: /save and upload/i}),
+    ).not.toBeDisabled()
   })
 })
 

@@ -5,9 +5,10 @@ import {
   TextArea,
 } from 'carbon-components-react'
 import dayjs from 'dayjs'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
+import {LabTest} from '../types/selectTest'
 import styles from './upload-report.scss'
 interface UploadReportProps {
   close: () => void
@@ -19,12 +20,25 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
   const currentDate: string = dayjs().format('MM/DD/YYYY')
   const [reportDate, setReportDate] = useState<number>(null)
   const [reportConclusion, setReportConclusion] = useState<string>('')
+  const [isDiscardButtonClicked, setIsDiscardButtonClicked] = useState<boolean>(
+    false,
+  )
+  const [selectedTests, setSelectedTests] = useState<Array<LabTest>>([])
   const maxCount: number = 500
 
   const handleDiscard = () => {
+    setIsDiscardButtonClicked(true)
     setReportDate(null)
     setReportConclusion('')
+    setSelectedTests([])
   }
+
+  useEffect(() => {
+    reportDate === null &&
+      selectedTests.length === 0 &&
+      reportConclusion === '' &&
+      setIsDiscardButtonClicked(false)
+  }, [isDiscardButtonClicked])
 
   const handleSave = () => {
     console.log(
@@ -32,6 +46,8 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
       reportDate,
       ' Review Comments',
       reportConclusion,
+      'Selected Tests',
+      selectedTests,
     ),
       close()
   }
@@ -41,7 +57,12 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
       <Button onClick={handleDiscard} kind="secondary" size="lg">
         Discard
       </Button>
-      <Button onClick={handleSave} size="lg" disabled={!reportDate}>
+      <Button
+        onClick={handleSave}
+        size="lg"
+        disabled={!reportDate || selectedTests.length === 0}
+      >
+        {console.log(selectedTests.length, reportDate)}
         Save and Upload
       </Button>
     </div>
@@ -49,7 +70,11 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
 
   return (
     <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
-      <SelectTest />
+      <SelectTest
+        selectedTests={selectedTests}
+        setSelectedTests={setSelectedTests}
+        buttonClicked={isDiscardButtonClicked}
+      />
       <DatePicker
         className={styles.datePicker}
         datePickerType="single"

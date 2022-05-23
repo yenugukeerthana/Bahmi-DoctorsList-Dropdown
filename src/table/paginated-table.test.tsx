@@ -18,7 +18,6 @@ const mockPatientUuid = '1'
 describe('Paginated Table', () => {
   beforeEach(() => {
     Object.defineProperty(window, 'localStorage', {value: localStorageMock})
-    when(openmrsFetch).mockImplementation(() => jest.fn())
     localStorage.setItem('i18nextLng', 'en-us')
   })
   afterEach(() => {

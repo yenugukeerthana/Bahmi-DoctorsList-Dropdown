@@ -11,9 +11,8 @@ import {LabTest} from '../types/selectTest'
 import {fetcher, getLabTests} from '../utils'
 import styles from './select-test.scss'
 
-const SelectTest = () => {
+const SelectTest = ({selectedTests, setSelectedTests, buttonClicked}) => {
   const [searchResults, setSearchResults] = useState<Array<LabTest>>([])
-  const [selectedTests, setSelectedTests] = useState<Array<LabTest>>([])
   const [totalTests, setTotalTests] = useState<Array<LabTest>>([])
   const [searchValue, setSearchValue] = useState<string>()
   const [isAvailableTestsClicked, setIsAvailableTestsClicked] = useState<
@@ -31,8 +30,17 @@ const SelectTest = () => {
   )
 
   useEffect(() => {
-    if (searchResults.length == 0 && !searchValue) setSearchResults(totalTests)
-  }, [searchResults, searchValue])
+    buttonClicked && setSearchValue('')
+  }, [buttonClicked])
+
+  useEffect(() => {
+    if (
+      searchResults.length === 0 &&
+      selectedTests.length === 0 &&
+      !searchValue
+    )
+      setSearchResults(totalTests)
+  }, [searchValue])
 
   useEffect(() => {
     searchResults.length === 0 &&
@@ -48,7 +56,7 @@ const SelectTest = () => {
   useEffect(() => {
     if (searchValue) {
       const filteredTests = totalTests.filter(test =>
-        test.name?.display?.toLowerCase().includes(searchValue.toLowerCase()),
+        test.name.display.toLowerCase().includes(searchValue.toLowerCase()),
       )
       filterUnselectedTests(filteredTests)
     } else {
@@ -60,18 +68,17 @@ const SelectTest = () => {
     if (selectedTests.length > 0) {
       const tests = []
       for (let filteredTest of labTests) {
-        let isSelectedTestPresent = false
+        let isSelectedTestPresent = true
         for (let selectedTest of selectedTests) {
           if (filteredTest?.name?.display !== selectedTest?.name?.display)
-            isSelectedTestPresent = true
-          else {
             isSelectedTestPresent = false
+          else {
+            isSelectedTestPresent = true
             break
           }
         }
-        if (isSelectedTestPresent) tests.push(filteredTest)
+        if (!isSelectedTestPresent) tests.push(filteredTest)
       }
-      console.log(tests)
       setSearchResults(tests)
     } else setSearchResults([...labTests])
   }
@@ -82,26 +89,29 @@ const SelectTest = () => {
     } else setSearchResults([...totalTests])
   }
 
-  const handleSelect = (selectedItem: LabTest) => {
-    setSelectedTests([...selectedTests, selectedItem])
+  const handleSelect = (selectedTest: LabTest) => {
+    setSelectedTests([...selectedTests, selectedTest])
     setSearchResults(
       searchResults.filter(
-        selectedResult => selectedResult.name.uuid !== selectedItem.name.uuid,
+        selectedResult =>
+          selectedResult?.name?.display != selectedTest?.name?.display,
       ),
     )
   }
 
-  const handleUnSelect = (selectedTest: LabTest) => {
-    if (
-      selectedTest.name.display
-        .toLowerCase()
-        .includes(searchValue?.toLowerCase())
-    )
-      setSearchResults(searchResults => [...searchResults, selectedTest])
+  const updateSearchResultOnUnSelect = (selectedTest: LabTest) =>
+    (selectedTest.name.display
+      .toLowerCase()
+      .includes(searchValue?.toLowerCase()) ||
+      !searchValue) &&
+    setSearchResults(searchResults => [...searchResults, selectedTest])
 
+  const handleUnSelect = (unSelectedTest: LabTest) => {
+    updateSearchResultOnUnSelect(unSelectedTest)
     setSelectedTests(
-      selectedTests.filter(
-        item => item?.name?.display !== selectedTest?.name?.display,
+      selectedTests?.filter(
+        (item: LabTest) =>
+          item.name.display !== unSelectedTest.name.display,
       ),
     )
   }
@@ -109,10 +119,10 @@ const SelectTest = () => {
   const showSearchCount = () => {
     if (searchResults.length > 0) {
       return (
-        <p>
+        <>
           {searchResults.length} items matching "
           <p className={styles.bold}>{searchValue}</p>"
-        </p>
+        </>
       )
     }
     return 'No matching tests found'
