@@ -6,18 +6,20 @@ import {
 } from 'carbon-components-react'
 import React, {useEffect, useState} from 'react'
 import useSWR from 'swr'
+import {useSelectedTests} from '../context/upload-report-context'
 import Loader from '../loader/loader.component'
 import {LabTest} from '../types/selectTest'
 import {fetcher, getLabTests} from '../utils'
 import styles from './select-test.scss'
 
-const SelectTest = ({selectedTests, setSelectedTests, buttonClicked}) => {
+const SelectTest = ({buttonClicked}) => {
   const [searchResults, setSearchResults] = useState<Array<LabTest>>([])
   const [totalTests, setTotalTests] = useState<Array<LabTest>>([])
   const [searchValue, setSearchValue] = useState<string>()
   const [isAvailableTestsClicked, setIsAvailableTestsClicked] = useState<
     boolean
   >(true)
+  const {selectedTests, setSelectedTests} = useSelectedTests()
 
   const {data: labTestResults, error: labTestResultsError} = useSWR<any, Error>(
     getLabTests,
@@ -99,19 +101,18 @@ const SelectTest = ({selectedTests, setSelectedTests, buttonClicked}) => {
     )
   }
 
-  const updateSearchResultOnUnSelect = (selectedTest: LabTest) =>
-    (selectedTest.name.display
+  const updateSearchResultOnUnSelect = (unSelectedTest: LabTest) =>{
+    (unSelectedTest.name.display
       .toLowerCase()
       .includes(searchValue?.toLowerCase()) ||
       !searchValue) &&
-    setSearchResults(searchResults => [...searchResults, selectedTest])
+    setSearchResults(searchResults => [...searchResults, unSelectedTest])}
 
   const handleUnSelect = (unSelectedTest: LabTest) => {
     updateSearchResultOnUnSelect(unSelectedTest)
     setSelectedTests(
       selectedTests?.filter(
-        (item: LabTest) =>
-          item.name.display !== unSelectedTest.name.display,
+        (item: LabTest) => item.name.display !== unSelectedTest.name.display,
       ),
     )
   }
@@ -189,13 +190,13 @@ const SelectTest = ({selectedTests, setSelectedTests, buttonClicked}) => {
           open={isAvailableTestsClicked}
           children={renderSearchResults()}
           onClick={() => setIsAvailableTestsClicked(!isAvailableTestsClicked)}
-        ></AccordionItem>
+        />
 
         <AccordionItem
           title={`Selected Tests ( ${selectedTests.length} )`}
           open={true}
           children={renderSelectedTests()}
-        ></AccordionItem>
+        />
       </Accordion>
     </>
   )

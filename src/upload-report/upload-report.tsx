@@ -2,13 +2,13 @@ import {
   Button,
   DatePicker,
   DatePickerInput,
-  TextArea,
+  TextArea
 } from 'carbon-components-react'
 import dayjs from 'dayjs'
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelectedTests } from '../context/upload-report-context'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
-import {LabTest} from '../types/selectTest'
 import styles from './upload-report.scss'
 interface UploadReportProps {
   close: () => void
@@ -23,7 +23,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
   const [isDiscardButtonClicked, setIsDiscardButtonClicked] = useState<boolean>(
     false,
   )
-  const [selectedTests, setSelectedTests] = useState<Array<LabTest>>([])
+  const {selectedTests, setSelectedTests} = useSelectedTests()
   const maxCount: number = 500
 
   const handleDiscard = () => {
@@ -62,7 +62,6 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
         size="lg"
         disabled={!reportDate || selectedTests.length === 0}
       >
-        {console.log(selectedTests.length, reportDate)}
         Save and Upload
       </Button>
     </div>
@@ -70,11 +69,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
 
   return (
     <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
-      <SelectTest
-        selectedTests={selectedTests}
-        setSelectedTests={setSelectedTests}
-        buttonClicked={isDiscardButtonClicked}
-      />
+      <SelectTest buttonClicked={isDiscardButtonClicked} />
       <DatePicker
         className={styles.datePicker}
         datePickerType="single"
