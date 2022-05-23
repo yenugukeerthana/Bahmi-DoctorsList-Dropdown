@@ -6,7 +6,9 @@ import {
 } from 'carbon-components-react'
 import dayjs from 'dayjs'
 import React, {useState} from 'react'
+import {useSelectedFile} from '../context/upload-report-context'
 import Overlay from '../overlay'
+import UploadFile from '../upload-file/upload-file'
 import styles from './upload-report.scss'
 interface UploadReportProps {
   close: () => void
@@ -19,10 +21,12 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
   const [reportDate, setReportDate] = useState<number>(null)
   const [reportConclusion, setReportConclusion] = useState<string>('')
   const maxCount: number = 500
+  const {selectedFile, setSelectedFile} = useSelectedFile()
 
   const handleDiscard = () => {
     setReportDate(null)
     setReportConclusion('')
+    setSelectedFile(null)
   }
 
   const handleSave = () => {
@@ -40,7 +44,11 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
       <Button onClick={handleDiscard} kind="secondary" size="lg">
         Discard
       </Button>
-      <Button onClick={handleSave} size="lg" disabled={!reportDate}>
+      <Button
+        onClick={handleSave}
+        size="lg"
+        disabled={!reportDate || !selectedFile}
+      >
         Save and Upload
       </Button>
     </div>
@@ -81,6 +89,10 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
           value={reportConclusion}
           onChange={e => setReportConclusion(e.target.value)}
         />
+      </div>
+      <br />
+      <div>
+        <UploadFile />
       </div>
     </Overlay>
   )

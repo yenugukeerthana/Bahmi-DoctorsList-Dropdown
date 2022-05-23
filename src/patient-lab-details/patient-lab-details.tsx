@@ -3,6 +3,7 @@ import {ExtensionSlot, usePatient} from '@openmrs/esm-framework'
 import {Button} from 'carbon-components-react'
 import React, {useState} from 'react'
 import {RouteComponentProps} from 'react-router-dom'
+import {UploadReportProvider} from '../context/upload-report-context'
 import Loader from '../loader/loader.component'
 import PaginatedTable from '../table/paginated-table'
 import UploadReport from '../upload-report/upload-report'
@@ -56,10 +57,12 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
             Upload Report
           </Button>
           {onButtonClick && (
-            <UploadReport
-              close={() => setOnButtonClick(false)}
-              header="Upload Report"
-            />
+            <UploadReportProvider>
+              <UploadReport
+                close={() => setOnButtonClick(false)}
+                header="Upload Report"
+              />
+            </UploadReportProvider>
           )}
         </div>
       )}

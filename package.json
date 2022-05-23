@@ -7,7 +7,7 @@
   "license": "MIT",
   "homepage": "https://github.com/bahmni/bahmni-lab-frontend#readme",
   "scripts": {
-    "bahmni": "npx openmrs develop --spa-path '/lab' --importmap 'config/dev-importmap.json' --config-url http://localhost:8201/config/config.json --port 8200 --backend 'http://localhost:8080'",
+    "bahmni": "npx openmrs develop --spa-path '/lab' --importmap 'config/dev-importmap.json' --config-url http://localhost:8201/config/dev-config.json --port 8200 --backend 'http://localhost:8080'",
     "omrs:appshell": "npx openmrs build --spa-path /lab --api-url '/openmrs' --config-path 'config/config.json' --target 'omrs-app-shell'",
     "omrs:assemble": "npx openmrs assemble --config 'config/spa-build-config.json' --mode 'config' --target 'omrs-app-shell'",
     "importmap": "node ./tools/updateImportMap.js",
