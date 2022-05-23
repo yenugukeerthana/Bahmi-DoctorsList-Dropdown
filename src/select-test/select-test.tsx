@@ -12,7 +12,7 @@ import {LabTest} from '../types/selectTest'
 import {fetcher, getLabTests} from '../utils'
 import styles from './select-test.scss'
 
-const SelectTest = ({buttonClicked}) => {
+const SelectTest = ({isDiscardButtonClicked}) => {
   const [searchResults, setSearchResults] = useState<Array<LabTest>>([])
   const [totalTests, setTotalTests] = useState<Array<LabTest>>([])
   const [searchValue, setSearchValue] = useState<string>()
@@ -32,8 +32,8 @@ const SelectTest = ({buttonClicked}) => {
   )
 
   useEffect(() => {
-    buttonClicked && setSearchValue('')
-  }, [buttonClicked])
+    isDiscardButtonClicked && setSearchValue('')
+  }, [isDiscardButtonClicked])
 
   useEffect(() => {
     if (
@@ -42,7 +42,7 @@ const SelectTest = ({buttonClicked}) => {
       !searchValue
     )
       setSearchResults(totalTests)
-  }, [searchValue])
+  }, [searchValue, searchResults, selectedTests])
 
   useEffect(() => {
     searchResults.length === 0 &&
@@ -60,13 +60,13 @@ const SelectTest = ({buttonClicked}) => {
       const filteredTests = totalTests.filter(test =>
         test.name.display.toLowerCase().includes(searchValue.toLowerCase()),
       )
-      filterUnselectedTests(filteredTests)
+      filterSearchResults(filteredTests)
     } else {
-      filterUnselectedTests(totalTests)
+      filterSearchResults(totalTests)
     }
   }, [searchValue])
 
-  const filterUnselectedTests = (labTests: Array<LabTest>) => {
+  const filterSearchResults = (labTests: Array<LabTest>) => {
     if (selectedTests.length > 0) {
       const tests = []
       for (let filteredTest of labTests) {
@@ -87,7 +87,7 @@ const SelectTest = ({buttonClicked}) => {
 
   const handleClear = () => {
     if (selectedTests.length > 0) {
-      filterUnselectedTests(totalTests)
+      filterSearchResults(totalTests)
     } else setSearchResults([...totalTests])
   }
 
@@ -95,24 +95,25 @@ const SelectTest = ({buttonClicked}) => {
     setSelectedTests([...selectedTests, selectedTest])
     setSearchResults(
       searchResults.filter(
-        selectedResult =>
-          selectedResult?.name?.display != selectedTest?.name?.display,
+        (availableTest: LabTest) =>
+          availableTest?.name?.display !== selectedTest?.name?.display,
       ),
     )
   }
 
-  const updateSearchResultOnUnSelect = (unSelectedTest: LabTest) =>
-    (unSelectedTest.name.display
+  const updateSearchResultOnUnselect = (unselectedTest: LabTest) =>
+    (unselectedTest.name.display
       .toLowerCase()
       .includes(searchValue?.toLowerCase()) ||
       !searchValue) &&
-      setSearchResults(searchResults => [...searchResults, unSelectedTest])
+    setSearchResults(searchResults => [...searchResults, unselectedTest])
 
-  const handleUnSelect = (unSelectedTest: LabTest) => {
-    updateSearchResultOnUnSelect(unSelectedTest)
+  const handleUnselect = (unselectedTest: LabTest) => {
+    updateSearchResultOnUnselect(unselectedTest)
     setSelectedTests(
       selectedTests?.filter(
-        (item: LabTest) => item.name.display !== unSelectedTest.name.display,
+        (selectedTest: LabTest) =>
+          selectedTest.name.display !== unselectedTest.name.display,
       ),
     )
   }
@@ -157,9 +158,9 @@ const SelectTest = ({buttonClicked}) => {
           <Checkbox
             id={selectedTest.name.uuid}
             checked={true}
-            key={`${selectedTest.name.uuid} ${index}`}
+            key={`${selectedTest.name.uuid}${index}`}
             labelText={selectedTest.name.display}
-            onChange={() => handleUnSelect(selectedTest)}
+            onChange={() => handleUnselect(selectedTest)}
           />
         ))}
       </div>

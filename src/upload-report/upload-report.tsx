@@ -69,7 +69,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
 
   return (
     <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
-      <SelectTest buttonClicked={isDiscardButtonClicked} />
+      <SelectTest isDiscardButtonClicked={isDiscardButtonClicked} />
       <DatePicker
         className={styles.datePicker}
         datePickerType="single"
