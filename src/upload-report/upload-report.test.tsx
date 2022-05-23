@@ -3,6 +3,7 @@ import {render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import {SWRConfig} from 'swr'
+import {UploadReportProvider} from '../context/upload-report-context'
 import {localStorageMock} from '../utils/test-utils'
 import {mockLabTestsResponse} from '../__mocks__/selectTests.mock'
 import UploadReport from './upload-report'
@@ -19,7 +20,9 @@ describe('Upload Report', () => {
     const mockedLayout = useLayoutType as jest.Mock
     mockedLayout.mockReturnValue('desktop')
 
-    render(<UploadReport close={close} header={'Test Header'} />)
+    renderWithContextProvider(
+      <UploadReport close={close} header={'Test Header'} />,
+    )
 
     userEvent.click(screen.getByLabelText('close-icon'))
 
@@ -32,7 +35,14 @@ describe('Upload Report', () => {
     const mockedLayout = useLayoutType as jest.Mock
     mockedLayout.mockReturnValue('desktop')
 
-    render(<UploadReport close={close} header={'Test Header'} />)
+    const mockedOpenmrsFetch = openmrsFetch as jest.Mock
+    mockedOpenmrsFetch.mockResolvedValue(mockLabTestsResponse)
+
+    renderWithContextProvider(
+      <SWRConfig value={{provider: () => new Map()}}>
+        <UploadReport close={close} header={'Test Header'} />
+      </SWRConfig>,
+    )
 
     userEvent.click(
       screen.getByRole('textbox', {
@@ -41,7 +51,6 @@ describe('Upload Report', () => {
     )
 
     const currentDay: string = getFormatedDate(0)
-
     userEvent.click(screen.getByLabelText(currentDay))
 
     expect(
@@ -55,14 +64,26 @@ describe('Upload Report', () => {
         day: '2-digit',
       }),
     )
+    await waitFor(() =>
+      userEvent.type(screen.getByRole('searchbox', {name: /search/i}), 'ab'),
+    )
+    expect(screen.getByRole('searchbox', {name: /search/i})).toHaveValue('ab')
 
     userEvent.click(screen.getByRole('button', {name: /discard/i}))
 
+    expect(screen.getByRole('searchbox', {name: /search/i})).not.toHaveValue(
+      'ab',
+    )
     expect(
       screen.getByRole('textbox', {
         name: /report date/i,
       }),
     ).not.toHaveValue(currentDay)
+    expect(screen.getByTestId(/selected-tests/i)).toHaveTextContent(
+      'Selected Tests ( 0 )',
+    )
+    expect(screen.getByTestId(/available-tests/i)).toHaveTextContent(/Absolute Eosinphil Count/i)
+    expect(screen.getByTestId(/available-tests/i)).toHaveTextContent(/haemoglobin/i)
   })
   it('should not allow user to select future dates', async () => {
     localStorage.setItem('i18nextLng', 'en')
@@ -71,7 +92,9 @@ describe('Upload Report', () => {
     const mockedLayout = useLayoutType as jest.Mock
     mockedLayout.mockReturnValue('desktop')
 
-    render(<UploadReport close={close} header={'Test Header'} />)
+    renderWithContextProvider(
+      <UploadReport close={close} header={'Test Header'} />,
+    )
 
     expect(
       screen.getByRole('button', {name: /save and upload/i}),
@@ -98,7 +121,7 @@ describe('Upload Report', () => {
     const mockedLayout = useLayoutType as jest.Mock
     mockedLayout.mockReturnValue('desktop')
 
-    render(
+    renderWithContextProvider(
       <SWRConfig value={{provider: () => new Map()}}>
         <UploadReport close={close} header={'Test Header'} />
       </SWRConfig>,
@@ -141,4 +164,8 @@ function getFormatedDate(addDays: number): string {
     month: 'long',
     day: '2-digit',
   })
+}
+
+function renderWithContextProvider(children) {
+  return render(<UploadReportProvider>{children}</UploadReportProvider>)
 }

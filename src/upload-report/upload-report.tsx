@@ -2,11 +2,11 @@ import {
   Button,
   DatePicker,
   DatePickerInput,
-  TextArea
+  TextArea,
 } from 'carbon-components-react'
 import dayjs from 'dayjs'
-import React, { useEffect, useState } from 'react'
-import { useSelectedTests } from '../context/upload-report-context'
+import React, {useEffect, useState} from 'react'
+import {useSelectedTests} from '../context/upload-report-context'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
 import styles from './upload-report.scss'

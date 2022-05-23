@@ -101,12 +101,12 @@ const SelectTest = ({buttonClicked}) => {
     )
   }
 
-  const updateSearchResultOnUnSelect = (unSelectedTest: LabTest) =>{
+  const updateSearchResultOnUnSelect = (unSelectedTest: LabTest) =>
     (unSelectedTest.name.display
       .toLowerCase()
       .includes(searchValue?.toLowerCase()) ||
       !searchValue) &&
-    setSearchResults(searchResults => [...searchResults, unSelectedTest])}
+      setSearchResults(searchResults => [...searchResults, unSelectedTest])
 
   const handleUnSelect = (unSelectedTest: LabTest) => {
     updateSearchResultOnUnSelect(unSelectedTest)
@@ -186,6 +186,7 @@ const SelectTest = ({buttonClicked}) => {
       <Accordion>
         <AccordionItem
           className={isAvailableTestsClicked && styles.accordionItem}
+          data-testid="available-tests"
           title={`Available Tests ( ${totalTests.length} )`}
           open={isAvailableTestsClicked}
           children={renderSearchResults()}
@@ -193,6 +194,7 @@ const SelectTest = ({buttonClicked}) => {
         />
 
         <AccordionItem
+          data-testid="selected-tests"
           title={`Selected Tests ( ${selectedTests.length} )`}
           open={true}
           children={renderSelectedTests()}
