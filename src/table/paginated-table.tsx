@@ -15,7 +15,7 @@ import React, {useMemo} from 'react'
 import useSWR from 'swr'
 import {headers, defaultPageSize} from '../constants'
 import {LabOrdersFetchResponse} from '../types'
-import {fetcher, getPendingLabOrdersURL} from '../utils/lab-orders'
+import {fetcher, getPendingLabOrdersURL} from '../utils'
 
 const PaginatedTable = ({patientUuid}) => {
   const {data: pendingLabOrders, error: pendingLabOrderDataError} = useSWR<

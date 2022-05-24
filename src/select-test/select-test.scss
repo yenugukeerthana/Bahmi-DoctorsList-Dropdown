@@ -1,0 +1,22 @@
+@import "~@openmrs/esm-styleguide/src/vars";
+@import "~carbon-components/src/globals/scss/vars";
+@import "~carbon-components/src/globals/scss/mixins";
+
+.searchTests {
+    padding: 1rem 0 1rem 0;
+}
+
+.bold {
+    font-weight: bold;
+    display: inline;
+}
+
+.accordionItem {
+    height: fit-content;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.searchValue {
+    padding-bottom: 1rem;
+}

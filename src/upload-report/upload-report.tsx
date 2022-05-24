@@ -6,11 +6,15 @@ import {
   TextArea,
 } from 'carbon-components-react'
 import dayjs from 'dayjs'
-import React, {useState} from 'react'
-import {useSelectedFile} from '../context/upload-report-context'
-import Overlay from '../overlay'
+import {
+  useSelectedFile,
+  useSelectedTests,
+} from '../context/upload-report-context'
 import UploadFile from '../upload-file/upload-file'
 import {uploadDocumentURL} from '../utils/lab-orders'
+import React, {useEffect, useState} from 'react'
+import Overlay from '../overlay'
+import SelectTest from '../select-test/select-test'
 import styles from './upload-report.scss'
 
 interface UploadReportProps {
@@ -77,14 +81,27 @@ const UploadReport: React.FC<UploadReportProps> = ({
   const currentDate: string = dayjs().format('MM/DD/YYYY')
   const [reportDate, setReportDate] = useState<number>(null)
   const [reportConclusion, setReportConclusion] = useState<string>('')
+  const [isDiscardButtonClicked, setIsDiscardButtonClicked] = useState<boolean>(
+    false,
+  )
+  const {selectedTests, setSelectedTests} = useSelectedTests()
   const maxCount: number = 500
   const {selectedFile, setSelectedFile} = useSelectedFile()
 
   const handleDiscard = () => {
+    setIsDiscardButtonClicked(true)
     setReportDate(null)
     setReportConclusion('')
     setSelectedFile(null)
+    setSelectedTests([])
   }
+
+  useEffect(() => {
+    reportDate === null &&
+      selectedTests.length === 0 &&
+      reportConclusion === '' &&
+      setIsDiscardButtonClicked(false)
+  }, [isDiscardButtonClicked])
 
   const handleSave = () => {
     handleFileUpload(selectedFile, patientUuid)
@@ -93,6 +110,8 @@ const UploadReport: React.FC<UploadReportProps> = ({
       reportDate,
       ' Review Comments',
       reportConclusion,
+      'Selected Tests',
+      selectedTests,
     ),
       close()
   }
@@ -105,7 +124,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
       <Button
         onClick={handleSave}
         size="lg"
-        disabled={!reportDate || !selectedFile}
+        disabled={!reportDate || !selectedFile || selectedTests.length === 0}
       >
         Save and Upload
       </Button>
@@ -114,7 +133,9 @@ const UploadReport: React.FC<UploadReportProps> = ({
 
   return (
     <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
+      <SelectTest isDiscardButtonClicked={isDiscardButtonClicked} />
       <DatePicker
+        className={styles.datePicker}
         datePickerType="single"
         locale={locale}
         short={true}
@@ -125,12 +146,15 @@ const UploadReport: React.FC<UploadReportProps> = ({
         }
         allowInput={false}
       >
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Report Date"
-          id="reportDate"
-        />
+        <label id="reportDateLabel">
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Report Date"
+            id="reportDate"
+          />
+        </label>
       </DatePicker>
+
       <div style={{paddingTop: '1rem'}}>
         <TextArea
           labelText={
@@ -142,7 +166,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
               >{`${reportConclusion?.length}/${maxCount}`}</span>
             </>
           }
-          maxCount={maxCount}
+          maxLength={maxCount}
           required={true}
           value={reportConclusion}
           onChange={e => setReportConclusion(e.target.value)}
