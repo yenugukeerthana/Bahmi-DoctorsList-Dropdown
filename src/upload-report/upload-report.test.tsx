@@ -112,7 +112,7 @@ describe('Upload Report', () => {
     expect(currentDay.className).not.toMatch(/-disabled/i)
     expect(futureDate.className).toMatch(/-disabled/i)
   })
-  it('should disable save and upload button until report date, selected test is entered', async () => {
+  it('should disable save and upload button until report date, selected test has value', async () => {
     localStorage.setItem('i18nextLng', 'en')
     const close = jest.fn()
     const mockedOpenmrsFetch = openmrsFetch as jest.Mock
@@ -144,6 +144,7 @@ describe('Upload Report', () => {
     await waitFor(() =>
       expect(screen.queryByText(/loading \.\.\./i)).not.toBeInTheDocument(),
     )
+    expect(screen.getByText(/select tests/i)).toBeInTheDocument()
 
     userEvent.click(
       screen.getByRole('checkbox', {name: /Absolute Eosinphil Count/i}),
