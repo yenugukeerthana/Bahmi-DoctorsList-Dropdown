@@ -75,6 +75,7 @@ describe('Select Test', () => {
       screen.getByRole('checkbox', {name: /Absolute Eosinphil Count/i}),
     )
 
+    expect(screen.getByText('Available Tests ( 1 )')).toBeInTheDocument()
     expect(screen.getByText('Selected Tests ( 1 )')).toBeInTheDocument()
     expect(screen.getByTestId(/selected-tests/i)).toHaveTextContent(
       /Absolute Eosinphil Count/i,
