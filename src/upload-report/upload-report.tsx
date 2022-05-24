@@ -11,7 +11,7 @@ import {
   useSelectedTests,
 } from '../context/upload-report-context'
 import UploadFile from '../upload-file/upload-file'
-import {uploadDocumentURL} from '../utils/lab-orders'
+import {uploadDocumentURL} from '../utils/index'
 import React, {useEffect, useState} from 'react'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
@@ -96,12 +96,12 @@ const UploadReport: React.FC<UploadReportProps> = ({
     setSelectedTests([])
   }
 
-  useEffect(() => {
-    reportDate === null &&
-      selectedTests.length === 0 &&
-      reportConclusion === '' &&
-      setIsDiscardButtonClicked(false)
-  }, [isDiscardButtonClicked])
+  // useEffect(() => {
+  //   reportDate === null &&
+  //     selectedTests.length === 0 &&
+  //     reportConclusion === '' &&
+  //     setIsDiscardButtonClicked(false)
+  // }, [isDiscardButtonClicked])
 
   const handleSave = () => {
     handleFileUpload(selectedFile, patientUuid)
