@@ -11,65 +11,17 @@ import {
   useSelectedTests,
 } from '../context/upload-report-context'
 import UploadFile from '../upload-file/upload-file'
-import {uploadDocumentURL} from '../utils/index'
+import {postApiCall, uploadDocumentURL} from '../utils/api-utils'
 import React, {useEffect, useState} from 'react'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
 import styles from './upload-report.scss'
+import { saveDiagnosticReport, uploadFile } from './upload-report.resources'
 
 interface UploadReportProps {
   close: () => void
   header: string
   patientUuid: string
-}
-
-const postApiCall = async (url, data) => {
-  console.log('data: ' + data)
-  return await openmrsFetch(url, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-}
-
-const removeBase64 = fileData => {
-  const searchStr = ';base64'
-  return fileData.substring(
-    fileData.indexOf(searchStr) + searchStr.length,
-    fileData.length,
-  )
-}
-
-const fileType = file => {
-  return file.type.split('/')[1]
-}
-
-const requestBody = (fileData, file, patientUuid) => {
-  const data = {
-    content: removeBase64(fileData),
-    encounterTypeName: 'Patient Document',
-    fileType: fileType(file),
-    format: fileType(file),
-    patientUuid: patientUuid,
-  }
-  return data
-}
-
-const handleFileUpload = async (file: File, patientUuid: string) => {
-  const reader = new FileReader()
-  reader.onload = async event => {
-    const fileData = event.target.result.toString()
-
-    const {fileUrl} = (
-      await postApiCall(
-        uploadDocumentURL,
-        requestBody(fileData, file, patientUuid),
-      )
-    ).data
-  }
-  reader.readAsDataURL(file)
 }
 
 const UploadReport: React.FC<UploadReportProps> = ({
@@ -79,7 +31,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
 }) => {
   const locale: Object = localStorage.getItem('i18nextLng')
   const currentDate: string = dayjs().format('MM/DD/YYYY')
-  const [reportDate, setReportDate] = useState<number>(null)
+  const [reportDate, setReportDate] = useState<Date>(null)
   const [reportConclusion, setReportConclusion] = useState<string>('')
   const [isDiscardButtonClicked, setIsDiscardButtonClicked] = useState<boolean>(
     false,
@@ -96,15 +48,23 @@ const UploadReport: React.FC<UploadReportProps> = ({
     setSelectedTests([])
   }
 
-  // useEffect(() => {
-  //   reportDate === null &&
-  //     selectedTests.length === 0 &&
-  //     reportConclusion === '' &&
-  //     setIsDiscardButtonClicked(false)
-  // }, [isDiscardButtonClicked])
+  const saveReport = () => {
+    const ac = new AbortController()
+    const reader = new FileReader()
+    reader.onload = async event => {
+      const uploadFileResponse = await uploadFile(patientUuid, event.target.result.toString(), selectedFile.type, ac);
+      if(uploadFileResponse.ok){
+        const url = uploadFileResponse.data.url
+        if(url){
+          saveDiagnosticReport(patientUuid, reportDate, selectedTests[0], url, selectedFile.name, reportConclusion, ac).then(
+            data => console.log("save successfully!!")
+          )
+        }
+      }
+     
+    }
+    reader.readAsDataURL(selectedFile)
 
-  const handleSave = () => {
-    handleFileUpload(selectedFile, patientUuid)
     console.log(
       'Report date',
       reportDate,
@@ -122,7 +82,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
         Discard
       </Button>
       <Button
-        onClick={handleSave}
+        onClick={saveReport}
         size="lg"
         disabled={!reportDate || !selectedFile || selectedTests.length === 0}
       >
@@ -142,7 +102,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
         value={reportDate}
         maxDate={currentDate}
         onChange={(selectedDate: Date[]) =>
-          setReportDate(Date.parse(selectedDate[0].toString()))
+          setReportDate(selectedDate[0])
         }
         allowInput={false}
       >
