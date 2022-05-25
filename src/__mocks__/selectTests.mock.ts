@@ -126,5 +126,5 @@ export const mockDiagnosticReportResponse = {
 export const uploadFileRequestBody =
   '{"content":",Y29udGVudA==","encounterTypeName":"Patient Document","fileType":"pdf","format":"pdf","patientUuid":"123"}'
 
-export const diagnosticReportRequestBody =
-  '{"resourceType":"DiagnosticReport","status":"final","code":{"coding":[{"code":"07a128f7-f596-45d5-a2a9-c447bc9e5112","display":"Absolute Eosinphil Count"}]},"subject":{"reference":"Patient/123"},"issued":"2022-05-24T18:30:00.000Z","conclusion":"","presentedForm":{"url":"100/76-Patient Document-7baff463-fdaa-43d0-a402-aa948c296958.pdf","title":"test.pdf"}}'
+export const diagnosticReportRequestBody = reportDate =>
+  `{"resourceType":"DiagnosticReport","status":"final","code":{"coding":[{"code":"07a128f7-f596-45d5-a2a9-c447bc9e5112","display":"Absolute Eosinphil Count"}]},"subject":{"reference":"Patient/123"},"issued":"${reportDate}","conclusion":"","presentedForm":{"url":"100/76-Patient Document-7baff463-fdaa-43d0-a402-aa948c296958.pdf","title":"test.pdf"}}`

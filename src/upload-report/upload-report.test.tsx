@@ -266,7 +266,7 @@ describe('Upload Report', () => {
     expect(mockedOpenmrsFetch.mock.calls[1][1].body).toBe(uploadFileRequestBody)
     expect(mockedOpenmrsFetch.mock.calls[2][1].method).toBe('POST')
     expect(mockedOpenmrsFetch.mock.calls[2][1].body).toBe(
-      diagnosticReportRequestBody,
+      diagnosticReportRequestBody(new Date(currentDay).toISOString()),
     )
   })
 })
