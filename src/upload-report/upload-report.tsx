@@ -1,4 +1,3 @@
-import {openmrsFetch} from '@openmrs/esm-framework'
 import {
   Button,
   DatePicker,
@@ -11,12 +10,11 @@ import {
   useSelectedTests,
 } from '../context/upload-report-context'
 import UploadFile from '../upload-file/upload-file'
-import {postApiCall, uploadDocumentURL} from '../utils/api-utils'
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
 import styles from './upload-report.scss'
-import { saveDiagnosticReport, uploadFile } from './upload-report.resources'
+import {saveDiagnosticReport, uploadFile} from './upload-report.resources'
 
 interface UploadReportProps {
   close: () => void
@@ -52,16 +50,26 @@ const UploadReport: React.FC<UploadReportProps> = ({
     const ac = new AbortController()
     const reader = new FileReader()
     reader.onload = async event => {
-      const uploadFileResponse = await uploadFile(patientUuid, event.target.result.toString(), selectedFile.type, ac);
-      if(uploadFileResponse.ok){
+      const uploadFileResponse = await uploadFile(
+        patientUuid,
+        event.target.result.toString(),
+        selectedFile.type,
+        ac,
+      )
+      if (uploadFileResponse.ok) {
         const url = uploadFileResponse.data.url
-        if(url){
-          saveDiagnosticReport(patientUuid, reportDate, selectedTests[0], url, selectedFile.name, reportConclusion, ac).then(
-            data => console.log("save successfully!!")
-          )
+        if (url) {
+          saveDiagnosticReport(
+            patientUuid,
+            reportDate,
+            selectedTests[0],
+            url,
+            selectedFile.name,
+            reportConclusion,
+            ac,
+          ).then(data => console.log('save successfully!!'))
         }
       }
-     
     }
     reader.readAsDataURL(selectedFile)
 
@@ -94,6 +102,8 @@ const UploadReport: React.FC<UploadReportProps> = ({
   return (
     <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
       <SelectTest isDiscardButtonClicked={isDiscardButtonClicked} />
+      <br />
+      <UploadFile />
       <DatePicker
         className={styles.datePicker}
         datePickerType="single"
@@ -101,9 +111,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
         short={true}
         value={reportDate}
         maxDate={currentDate}
-        onChange={(selectedDate: Date[]) =>
-          setReportDate(selectedDate[0])
-        }
+        onChange={(selectedDate: Date[]) => setReportDate(selectedDate[0])}
         allowInput={false}
       >
         <label id="reportDateLabel">
@@ -131,10 +139,6 @@ const UploadReport: React.FC<UploadReportProps> = ({
           value={reportConclusion}
           onChange={e => setReportConclusion(e.target.value)}
         />
-      </div>
-      <br />
-      <div>
-        <UploadFile />
       </div>
     </Overlay>
   )

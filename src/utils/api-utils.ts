@@ -1,5 +1,5 @@
 import {FetchResponse, openmrsFetch} from '@openmrs/esm-framework'
-import { FetcherResponse } from 'swr/dist/types'
+import {FetcherResponse} from 'swr/dist/types'
 const s = 'byFullySpecifiedName'
 const name = 'Lab+Samples'
 const v =
@@ -12,10 +12,10 @@ export const getPendingLabOrdersURL = (patientUuid: string) =>
 export const getLabTests = () =>
   `/ws/rest/v1/concept?s=${s}&locale=${locale}&name=${name}&v=${v}`
 
-export const uploadDocumentURL = '/ws/rest/v1/bahmnicore/visitDocument/uploadDocument'
+export const uploadDocumentURL =
+  '/ws/rest/v1/bahmnicore/visitDocument/uploadDocument'
 
 export const saveDiagnosticReportURL = '/ws/fhir2/R4/DiagnosticReport'
-
 
 export const fetcher = (url: string) =>
   openmrsFetch(url, {
@@ -29,6 +29,6 @@ export const postApiCall = (url, data, abortController) => {
       'content-type': 'application/json',
     },
     body: JSON.stringify(data),
-    signal: abortController.signal
+    signal: abortController.signal,
   })
 }

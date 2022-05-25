@@ -5,7 +5,7 @@ import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
 import {SWRConfig} from 'swr'
 import {headers} from '../constants'
-import { localStorageMock } from '../utils/test-utils'
+import {localStorageMock} from '../utils/test-utils'
 import {
   mockEmptyPendingLabOrderResponse,
   mockPendingLabOrdersErrorResponse,
@@ -144,4 +144,3 @@ describe('Paginated Table', () => {
     ).not.toBeInTheDocument()
   })
 })
-

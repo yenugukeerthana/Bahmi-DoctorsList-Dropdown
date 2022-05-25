@@ -17,7 +17,9 @@ describe('Overlay', () => {
     render(<Overlay close={close} header={'Test Header'} />)
 
     expect(screen.getByLabelText(/close-icon/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/close-icon/i).getElementsByTagName('svg')).toBeTruthy()
+    expect(
+      screen.getByLabelText(/close-icon/i).getElementsByTagName('svg'),
+    ).toBeTruthy()
 
     userEvent.click(screen.getByLabelText(/close-icon/i))
 
@@ -32,7 +34,9 @@ describe('Overlay', () => {
     render(<Overlay close={close} header={'Test Header'} />)
 
     expect(screen.getByLabelText(/arrow-icon/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/arrow-icon/i).getElementsByTagName('svg')).toBeTruthy()
+    expect(
+      screen.getByLabelText(/arrow-icon/i).getElementsByTagName('svg'),
+    ).toBeTruthy()
 
     userEvent.click(screen.getByLabelText(/arrow-icon/i))
 

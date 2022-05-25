@@ -63,9 +63,9 @@ describe('upload file', () => {
     expect(errorMessage).toBeInTheDocument()
   })
 
-  it('should show the error message if file size is more than 512kb and file drop box should be available to upload valid file', async () => {
+  it('should show the error message if file size is more than 5 mb and file drop box should be available to upload valid file', async () => {
     const file = new File(['content'], 'test.jpg', {type: 'image/jpg'})
-    Object.defineProperty(file, 'size', {value: 1024 * 1024 + 1})
+    Object.defineProperty(file, 'size', {value: 5 * 1024 * 1024 + 1})
     renderWithContextProvider(<UploadFile />)
 
     const errorMessageQuery = screen.queryByText(
