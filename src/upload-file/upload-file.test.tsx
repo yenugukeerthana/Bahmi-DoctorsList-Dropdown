@@ -1,8 +1,9 @@
 import React from 'react'
-import {fireEvent, render, screen} from '@testing-library/react'
+import {render, screen} from '@testing-library/react'
 import UploadFile from './upload-file'
 import userEvent from '@testing-library/user-event'
 import {UploadReportProvider} from '../context/upload-report-context'
+import {uploadFiles} from '../utils/test-utils/upload-report-helper'
 
 describe('upload file', () => {
   it('should show the file upload box', () => {
@@ -15,7 +16,7 @@ describe('upload file', () => {
     expect(fileInput).toHaveAttribute('accept', 'image/jpg,application/pdf')
   })
 
-  it('should show the uploaded file if file is jpg and size is lesser than 512KB and file drop box should not be available', async () => {
+  it('should show the uploaded file if file is jpg and size is lesser than 5mb and file drop box should not be available', async () => {
     const file = new File(['content'], 'test.jpg', {type: 'image/jpg'})
     renderWithContextProvider(<UploadFile />)
 
@@ -123,25 +124,4 @@ describe('upload file', () => {
 
 function renderWithContextProvider(children) {
   return render(<UploadReportProvider>{children}</UploadReportProvider>)
-}
-
-function uploadFiles(input, files: File[]) {
-  Object.defineProperty(input, 'files', {
-    value: files,
-    configurable: true,
-  })
-
-  Object.defineProperty(input, 'value', {
-    set(newValue) {
-      if (!newValue) {
-        input.files.length = 0
-      }
-    },
-  })
-
-  fireEvent.change(input, {
-    target: {
-      files,
-    },
-  })
 }
