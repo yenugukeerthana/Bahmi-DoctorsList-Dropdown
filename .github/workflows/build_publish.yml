@@ -2,20 +2,29 @@ name: Build and Publish
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-env:
-  BAHMNI_VERSION: 0.94
+    branches: 
+      - main
   
 jobs:
-  build:
+  build_publish:
+    name: Build and Publish
     runs-on: ubuntu-latest
-
+    env:
+      HELM_CHART_PATH: package/helm/
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Verify app version
+        run: |
+          APP_VERSION=$(cat package/.appversion)
+          if [ $(git tag -l "$APP_VERSION") ]; then 
+            echo "App version $APP_VERSION already released. Please update app version in package/.appversion to represent next major/minor/patch increment"
+            exit 1
+          else
+            echo "setting artifact version to $(echo $APP_VERSION-${{github.run_number}})"
+            echo "ARTIFACT_VERSION=$(echo $APP_VERSION-${{github.run_number}})" >> $GITHUB_ENV
+          fi
+      - name: Setup Node.js 16.x
         uses: actions/setup-node@v1
         with:
           node-version: "16.x"
@@ -26,14 +35,50 @@ jobs:
       - run: yarn test
       - run: yarn build:dist
       - run: cp -R omrs-apps/* dist/
-      - name: Login to DockerHub
+      - name: Docker - Login
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Docker Build and push
+      - name: Docker - Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: package/docker/Dockerfile
           push: true
-          tags: bahmni/bahmni-lab:${{env.BAHMNI_VERSION}}-${{github.run_number}},bahmni/bahmni-lab:latest
+          tags: bahmni/bahmni-lab:${{env.ARTIFACT_VERSION}},bahmni/bahmni-lab:latest
+      - name: Helm - Update Version and Image Tag
+        run: |
+          yq --inplace '.image.tag = "${{ env.ARTIFACT_VERSION }}"' $HELM_CHART_PATH/values.yaml
+          yq --inplace '.version = "${{ env.ARTIFACT_VERSION }}"' $HELM_CHART_PATH/Chart.yaml
+
+      - name: Helm Lint
+        run: helm lint $HELM_CHART_PATH
+
+      - name: Helm Package
+        run: helm package $HELM_CHART_PATH
+
+      - name: Helm - Checkout Charts Repository
+        uses: actions/checkout@v2
+        with:
+          repository: Bahmni/helm-charts
+          ref: gh-pages
+          path: helm-charts
+          persist-credentials: false
+
+      - name: Helm - Copy chart
+        run: mkdir -p helm-charts/bahmni-lab/ && cp bahmni-lab-${{ env.ARTIFACT_VERSION }}.tgz helm-charts/bahmni-lab/
+
+      - name: Helm - reIndex
+        working-directory: helm-charts/
+        run: helm repo index --merge index.yaml --url https://bahmni.github.io/helm-charts/  .
+
+      - name: Helm - Publish Chart
+        working-directory: helm-charts/
+        run: |
+          git config user.name ${{ secrets.BAHMNI_USERNAME}}
+          git config user.email ${{ secrets.BAHMNI_EMAIL}}
+          git add .
+          git commit -m "Release of bahmni-lab-${{ env.ARTIFACT_VERSION }}"
+          git push 'https://${{ secrets.BAHMNI_USERNAME}}:${{ secrets.BAHMNI_PAT}}@github.com/bahmni/helm-charts.git' gh-pages
+
