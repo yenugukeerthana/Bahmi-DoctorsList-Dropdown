@@ -9,7 +9,7 @@ import useSWR from 'swr'
 import {useSelectedTests} from '../context/upload-report-context'
 import Loader from '../loader/loader.component'
 import {LabTest} from '../types/selectTest'
-import {fetcher, getLabTests} from '../utils'
+import {fetcher, getLabTests} from '../utils/api-utils'
 import styles from './select-test.scss'
 
 const SelectTest = ({isDiscardButtonClicked}) => {
@@ -151,7 +151,7 @@ const SelectTest = ({isDiscardButtonClicked}) => {
 
   const renderSelectedTests = () => {
     if (selectedTests.length == 0)
-      return <div>You have not selected any tests</div>
+      return <div className={'bx--label'}>You have not selected any tests</div>
     return (
       <div>
         {selectedTests.map((selectedTest, index) => (
@@ -172,14 +172,16 @@ const SelectTest = ({isDiscardButtonClicked}) => {
   if (!labTestResultsError && !labTestResults) return <Loader />
   return (
     <>
-      <h3>Select Tests</h3>
+      <p className={'bx--label'}>Select Tests</p>
       <div className={styles.searchTests}>
+        <p className={'bx--label'}>Search</p>
         <Search
           labelText="search"
           value={searchValue}
           onChange={e => {
             setSearchValue(e.target.value)
           }}
+          placeholder="Search by lab test name"
           onClear={handleClear}
         />
       </div>

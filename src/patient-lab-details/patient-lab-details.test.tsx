@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import {when} from 'jest-when'
 import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
-import { localStorageMock } from '../utils/test-utils'
+import {localStorageMock} from '../utils/test-utils'
 import PatientLabDetails from './patient-lab-details'
 
 const mockPatientUuid = '1'
@@ -151,7 +151,6 @@ describe('Patient lab details', () => {
     )
 
     userEvent.click(screen.getByRole('button', {name: /upload report/i}))
-   
 
     expect(screen.getByLabelText(/overlay/i)).toBeInTheDocument()
   })

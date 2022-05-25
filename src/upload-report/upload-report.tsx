@@ -5,42 +5,74 @@ import {
   TextArea,
 } from 'carbon-components-react'
 import dayjs from 'dayjs'
-import React, {useEffect, useState} from 'react'
-import {useSelectedTests} from '../context/upload-report-context'
+import {
+  useSelectedFile,
+  useSelectedTests,
+} from '../context/upload-report-context'
+import UploadFile from '../upload-file/upload-file'
+import React, {useState} from 'react'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
 import styles from './upload-report.scss'
+import {saveDiagnosticReport, uploadFile} from './upload-report.resources'
+
 interface UploadReportProps {
   close: () => void
   header: string
+  patientUuid: string
 }
 
-const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
+const UploadReport: React.FC<UploadReportProps> = ({
+  close,
+  header,
+  patientUuid,
+}) => {
   const locale: Object = localStorage.getItem('i18nextLng')
   const currentDate: string = dayjs().format('MM/DD/YYYY')
-  const [reportDate, setReportDate] = useState<number>(null)
+  const [reportDate, setReportDate] = useState<Date>(null)
   const [reportConclusion, setReportConclusion] = useState<string>('')
   const [isDiscardButtonClicked, setIsDiscardButtonClicked] = useState<boolean>(
     false,
   )
   const {selectedTests, setSelectedTests} = useSelectedTests()
   const maxCount: number = 500
+  const {selectedFile, setSelectedFile} = useSelectedFile()
 
   const handleDiscard = () => {
     setIsDiscardButtonClicked(true)
     setReportDate(null)
     setReportConclusion('')
+    setSelectedFile(null)
     setSelectedTests([])
   }
 
-  useEffect(() => {
-    reportDate === null &&
-      selectedTests.length === 0 &&
-      reportConclusion === '' &&
-      setIsDiscardButtonClicked(false)
-  }, [isDiscardButtonClicked])
+  const saveReport = () => {
+    const ac = new AbortController()
+    const reader = new FileReader()
+    reader.onload = async event => {
+      const uploadFileResponse = await uploadFile(
+        patientUuid,
+        event.target.result.toString(),
+        selectedFile.type,
+        ac,
+      )
+      if (uploadFileResponse.ok) {
+        const url = uploadFileResponse.data.url
+        if (url) {
+          saveDiagnosticReport(
+            patientUuid,
+            reportDate,
+            selectedTests[0],
+            url,
+            selectedFile.name,
+            reportConclusion,
+            ac,
+          ).then(data => console.log('save successfully!!'))
+        }
+      }
+    }
+    reader.readAsDataURL(selectedFile)
 
-  const handleSave = () => {
     console.log(
       'Report date',
       reportDate,
@@ -58,9 +90,9 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
         Discard
       </Button>
       <Button
-        onClick={handleSave}
+        onClick={saveReport}
         size="lg"
-        disabled={!reportDate || selectedTests.length === 0}
+        disabled={!reportDate || !selectedFile || selectedTests.length === 0}
       >
         Save and Upload
       </Button>
@@ -70,6 +102,8 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
   return (
     <Overlay close={close} header={header} buttonsGroup={renderButtonGroup()}>
       <SelectTest isDiscardButtonClicked={isDiscardButtonClicked} />
+      <br />
+      <UploadFile />
       <DatePicker
         className={styles.datePicker}
         datePickerType="single"
@@ -77,9 +111,7 @@ const UploadReport: React.FC<UploadReportProps> = ({close, header}) => {
         short={true}
         value={reportDate}
         maxDate={currentDate}
-        onChange={(selectedDate: Date[]) =>
-          setReportDate(Date.parse(selectedDate[0].toString()))
-        }
+        onChange={(selectedDate: Date[]) => setReportDate(selectedDate[0])}
         allowInput={false}
       >
         <label id="reportDateLabel">

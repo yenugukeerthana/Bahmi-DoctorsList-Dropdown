@@ -61,6 +61,7 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
               <UploadReport
                 close={() => setOnButtonClick(false)}
                 header="Upload Report"
+                patientUuid={patientUuid}
               />
             </UploadReportProvider>
           )}

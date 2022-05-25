@@ -1,5 +1,5 @@
 import {openmrsFetch, useLayoutType} from '@openmrs/esm-framework'
-import {render, screen, waitFor} from '@testing-library/react'
+import {fireEvent, render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import {SWRConfig} from 'swr'
@@ -21,7 +21,7 @@ describe('Upload Report', () => {
     mockedLayout.mockReturnValue('desktop')
 
     renderWithContextProvider(
-      <UploadReport close={close} header={'Test Header'} />,
+      <UploadReport close={close} header={'Test Header'} patientUuid={'123'} />,
     )
 
     userEvent.click(screen.getByLabelText('close-icon'))
@@ -29,6 +29,7 @@ describe('Upload Report', () => {
     expect(close).toBeCalled()
   })
   it('should reset the value on click of discard button', async () => {
+    const file = new File(['content'], 'test.jpg', {type: 'image/jpg'})
     localStorage.setItem('i18nextLng', 'en')
     const close = jest.fn()
 
@@ -40,7 +41,11 @@ describe('Upload Report', () => {
 
     renderWithContextProvider(
       <SWRConfig value={{provider: () => new Map()}}>
-        <UploadReport close={close} header={'Test Header'} />
+        <UploadReport
+          close={close}
+          header={'Test Header'}
+          patientUuid={'123'}
+        />
       </SWRConfig>,
     )
 
@@ -69,7 +74,21 @@ describe('Upload Report', () => {
     )
     expect(screen.getByRole('searchbox', {name: /search/i})).toHaveValue('ab')
 
+    const fileInput = screen.getByLabelText(
+      'Drag and drop files here or click to upload',
+    ) as HTMLInputElement
+
+    uploadFiles(fileInput, [file])
+
+    expect(fileInput.files.length).toBe(1)
+
+    const fileName = await screen.findByText('test.jpg')
+    expect(fileName).toBeInTheDocument()
+
     userEvent.click(screen.getByRole('button', {name: /discard/i}))
+
+    const fileNameQuery = await screen.queryByText('test.jpg')
+    expect(fileNameQuery).not.toBeInTheDocument()
 
     expect(screen.getByRole('searchbox', {name: /search/i})).not.toHaveValue(
       'ab',
@@ -82,8 +101,12 @@ describe('Upload Report', () => {
     expect(screen.getByTestId(/selected-tests/i)).toHaveTextContent(
       'Selected Tests ( 0 )',
     )
-    expect(screen.getByTestId(/available-tests/i)).toHaveTextContent(/Absolute Eosinphil Count/i)
-    expect(screen.getByTestId(/available-tests/i)).toHaveTextContent(/haemoglobin/i)
+    expect(screen.getByTestId(/available-tests/i)).toHaveTextContent(
+      /Absolute Eosinphil Count/i,
+    )
+    expect(screen.getByTestId(/available-tests/i)).toHaveTextContent(
+      /haemoglobin/i,
+    )
   })
   it('should not allow user to select future dates', async () => {
     localStorage.setItem('i18nextLng', 'en')
@@ -93,7 +116,7 @@ describe('Upload Report', () => {
     mockedLayout.mockReturnValue('desktop')
 
     renderWithContextProvider(
-      <UploadReport close={close} header={'Test Header'} />,
+      <UploadReport close={close} header={'Test Header'} patientUuid={'123'} />,
     )
 
     expect(
@@ -112,7 +135,8 @@ describe('Upload Report', () => {
     expect(currentDay.className).not.toMatch(/-disabled/i)
     expect(futureDate.className).toMatch(/-disabled/i)
   })
-  it('should disable save and upload button until report date, selected test is entered', async () => {
+  it('should disable save and upload button until report date, selected test and test report file have value', async () => {
+    const file = new File(['content'], 'test.jpg', {type: 'image/jpg'})
     localStorage.setItem('i18nextLng', 'en')
     const close = jest.fn()
     const mockedOpenmrsFetch = openmrsFetch as jest.Mock
@@ -123,7 +147,11 @@ describe('Upload Report', () => {
 
     renderWithContextProvider(
       <SWRConfig value={{provider: () => new Map()}}>
-        <UploadReport close={close} header={'Test Header'} />
+        <UploadReport
+          close={close}
+          header={'Test Header'}
+          patientUuid={'123'}
+        />
       </SWRConfig>,
     )
 
@@ -144,10 +172,21 @@ describe('Upload Report', () => {
     await waitFor(() =>
       expect(screen.queryByText(/loading \.\.\./i)).not.toBeInTheDocument(),
     )
+    expect(screen.getByText(/select tests/i)).toBeInTheDocument()
 
     userEvent.click(
       screen.getByRole('checkbox', {name: /Absolute Eosinphil Count/i}),
     )
+
+    const fileInput = screen.getByLabelText(
+      'Drag and drop files here or click to upload',
+    ) as HTMLInputElement
+
+    uploadFiles(fileInput, [file])
+
+    expect(fileInput.files.length).toBe(1)
+    const fileName = await screen.findByText('test.jpg')
+    expect(fileName).toBeInTheDocument()
 
     expect(
       screen.getByRole('button', {name: /save and upload/i}),
@@ -168,4 +207,24 @@ function getFormatedDate(addDays: number): string {
 
 function renderWithContextProvider(children) {
   return render(<UploadReportProvider>{children}</UploadReportProvider>)
+}
+function uploadFiles(input, files: File[]) {
+  Object.defineProperty(input, 'files', {
+    value: files,
+    configurable: true,
+  })
+
+  Object.defineProperty(input, 'value', {
+    set(newValue) {
+      if (!newValue) {
+        input.files.length = 0
+      }
+    },
+  })
+
+  fireEvent.change(input, {
+    target: {
+      files,
+    },
+  })
 }
