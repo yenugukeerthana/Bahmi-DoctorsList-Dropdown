@@ -1,0 +1,5 @@
+apiVersion: v2
+name: bahmni-lab
+description: Helm chart for bahmni-lab
+type: application
+version: 1.0.0

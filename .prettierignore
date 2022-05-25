@@ -14,3 +14,4 @@ omrs-app-shell/
 /build
 /coverage
 .github/
+/package
