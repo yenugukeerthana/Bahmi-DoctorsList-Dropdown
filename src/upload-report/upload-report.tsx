@@ -59,7 +59,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
       if (uploadFileResponse.ok) {
         const url = uploadFileResponse.data.url
         if (url) {
-          saveDiagnosticReport(
+          const diagnosticReportResponse = await saveDiagnosticReport(
             patientUuid,
             reportDate,
             selectedTests[0],
@@ -67,22 +67,15 @@ const UploadReport: React.FC<UploadReportProps> = ({
             selectedFile.name,
             reportConclusion,
             ac,
-          ).then(data => {
+          )
+          if (diagnosticReportResponse.ok) {
+            console.log('success !!')
             close(true)
-          })
+          }
         }
       }
     }
     reader.readAsDataURL(selectedFile)
-
-    console.log(
-      'Report date',
-      reportDate,
-      ' Review Comments',
-      reportConclusion,
-      'Selected Tests',
-      selectedTests,
-    )
   }
 
   const renderButtonGroup = () => (

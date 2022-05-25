@@ -106,3 +106,25 @@ export const mockLabTestsPendingResponse = {
     statusText: 'Pending',
   },
 }
+
+export const mockUploadFileResponse = {
+  data: {
+    url: '100/76-Patient Document-7baff463-fdaa-43d0-a402-aa948c296958.pdf',
+  },
+  ok: 'true',
+  status: 200,
+}
+
+export const mockDiagnosticReportResponse = {
+  data: {
+    id: 'e950a76d-30b8-4005-b3a6-e8fa2d5888ef',
+  },
+  ok: 'true',
+  status: 200,
+}
+
+export const uploadFileRequestBody =
+  '{"content":",Y29udGVudA==","encounterTypeName":"Patient Document","fileType":"pdf","format":"pdf","patientUuid":"123"}'
+
+export const diagnosticReportRequestBody =
+  '{"resourceType":"DiagnosticReport","status":"final","code":{"coding":[{"code":"07a128f7-f596-45d5-a2a9-c447bc9e5112","display":"Absolute Eosinphil Count"}]},"subject":{"reference":"Patient/123"},"issued":"2022-05-24T18:30:00.000Z","conclusion":"","presentedForm":{"url":"100/76-Patient Document-7baff463-fdaa-43d0-a402-aa948c296958.pdf","title":"test.pdf"}}'

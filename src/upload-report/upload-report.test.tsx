@@ -5,7 +5,14 @@ import React from 'react'
 import {SWRConfig} from 'swr'
 import {UploadReportProvider} from '../context/upload-report-context'
 import {localStorageMock} from '../utils/test-utils'
-import {mockLabTestsResponse} from '../__mocks__/selectTests.mock'
+import {uploadFiles} from '../utils/test-utils/upload-report-helper'
+import {
+  diagnosticReportRequestBody,
+  mockDiagnosticReportResponse,
+  mockLabTestsResponse,
+  mockUploadFileResponse,
+  uploadFileRequestBody,
+} from '../__mocks__/selectTests.mock'
 import UploadReport from './upload-report'
 
 describe('Upload Report', () => {
@@ -192,6 +199,76 @@ describe('Upload Report', () => {
       screen.getByRole('button', {name: /save and upload/i}),
     ).not.toBeDisabled()
   })
+  it('should make a file upload api call and fhir diagnostic api call on click of save and upload button', async () => {
+    const file = new File(['content'], 'test.pdf', {type: 'application/pdf'})
+    localStorage.setItem('i18nextLng', 'en')
+    const close = jest.fn()
+    const mockedOpenmrsFetch = openmrsFetch as jest.Mock
+    mockedOpenmrsFetch
+      .mockReturnValueOnce(mockLabTestsResponse)
+      .mockReturnValueOnce(mockUploadFileResponse)
+      .mockReturnValue(mockDiagnosticReportResponse)
+
+    const mockedLayout = useLayoutType as jest.Mock
+    mockedLayout.mockReturnValue('desktop')
+
+    renderWithContextProvider(
+      <SWRConfig value={{provider: () => new Map()}}>
+        <UploadReport
+          close={close}
+          header={'Test Header'}
+          patientUuid={'123'}
+        />
+      </SWRConfig>,
+    )
+
+    expect(
+      screen.getByRole('button', {name: /save and upload/i}),
+    ).toBeDisabled()
+
+    userEvent.click(
+      screen.getByRole('textbox', {
+        name: /report date/i,
+      }),
+    )
+
+    const currentDay: string = getFormatedDate(0)
+
+    userEvent.click(screen.getByLabelText(currentDay))
+
+    await waitFor(() =>
+      expect(screen.queryByText(/loading \.\.\./i)).not.toBeInTheDocument(),
+    )
+    expect(screen.getByText(/select tests/i)).toBeInTheDocument()
+
+    userEvent.click(
+      screen.getByRole('checkbox', {name: /Absolute Eosinphil Count/i}),
+    )
+
+    const fileInput = screen.getByLabelText(
+      'Drag and drop files here or click to upload',
+    ) as HTMLInputElement
+
+    uploadFiles(fileInput, [file])
+
+    expect(fileInput.files.length).toBe(1)
+    const fileName = await screen.findByText('test.pdf')
+    expect(fileName).toBeInTheDocument()
+
+    const saveButton = screen.getByRole('button', {name: /save and upload/i})
+
+    expect(saveButton).not.toBeDisabled()
+    userEvent.click(saveButton)
+    await waitFor(() => {
+      expect(mockedOpenmrsFetch).toBeCalledTimes(3)
+    })
+    expect(mockedOpenmrsFetch.mock.calls[1][1].method).toBe('POST')
+    expect(mockedOpenmrsFetch.mock.calls[1][1].body).toBe(uploadFileRequestBody)
+    expect(mockedOpenmrsFetch.mock.calls[2][1].method).toBe('POST')
+    expect(mockedOpenmrsFetch.mock.calls[2][1].body).toBe(
+      diagnosticReportRequestBody,
+    )
+  })
 })
 
 function getFormatedDate(addDays: number): string {
@@ -207,24 +284,4 @@ function getFormatedDate(addDays: number): string {
 
 function renderWithContextProvider(children) {
   return render(<UploadReportProvider>{children}</UploadReportProvider>)
-}
-function uploadFiles(input, files: File[]) {
-  Object.defineProperty(input, 'files', {
-    value: files,
-    configurable: true,
-  })
-
-  Object.defineProperty(input, 'value', {
-    set(newValue) {
-      if (!newValue) {
-        input.files.length = 0
-      }
-    },
-  })
-
-  fireEvent.change(input, {
-    target: {
-      files,
-    },
-  })
 }
