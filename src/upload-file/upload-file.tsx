@@ -6,7 +6,7 @@ import {
 import {useSelectedFile} from '../context/upload-report-context'
 
 const UploadFile = () => {
-  const maxFileSize: number = 512000
+  const maxFileSize: number = 5242880
   const validFileTypes = ['image/jpg', 'application/pdf']
   const fileSizeErrorMessage = 'File size exceeds max limit (5mb)'
   const fileFormatErrorMessage =
