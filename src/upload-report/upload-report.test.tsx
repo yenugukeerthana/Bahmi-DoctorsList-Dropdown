@@ -1,5 +1,5 @@
 import {openmrsFetch, useLayoutType} from '@openmrs/esm-framework'
-import {fireEvent, render, screen, waitFor} from '@testing-library/react'
+import {render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import {SWRConfig} from 'swr'

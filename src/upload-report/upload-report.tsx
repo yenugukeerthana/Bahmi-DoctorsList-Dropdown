@@ -69,7 +69,6 @@ const UploadReport: React.FC<UploadReportProps> = ({
             ac,
           )
           if (diagnosticReportResponse.ok) {
-            console.log('success !!')
             close(true)
           }
         }
