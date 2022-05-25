@@ -5,19 +5,19 @@ import {
   TextArea,
 } from 'carbon-components-react'
 import dayjs from 'dayjs'
+import React, {useState} from 'react'
 import {
   useSelectedFile,
   useSelectedTests,
 } from '../context/upload-report-context'
-import UploadFile from '../upload-file/upload-file'
-import React, {useState} from 'react'
 import Overlay from '../overlay'
 import SelectTest from '../select-test/select-test'
-import styles from './upload-report.scss'
+import UploadFile from '../upload-file/upload-file'
 import {saveDiagnosticReport, uploadFile} from './upload-report.resources'
+import styles from './upload-report.scss'
 
 interface UploadReportProps {
-  close: () => void
+  close: Function
   header: string
   patientUuid: string
 }
@@ -67,7 +67,9 @@ const UploadReport: React.FC<UploadReportProps> = ({
             selectedFile.name,
             reportConclusion,
             ac,
-          ).then(data => console.log('save successfully!!'))
+          ).then(data => {
+            close(true)
+          })
         }
       }
     }
@@ -80,8 +82,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
       reportConclusion,
       'Selected Tests',
       selectedTests,
-    ),
-      close()
+    )
   }
 
   const renderButtonGroup = () => (
