@@ -1,5 +1,4 @@
-import {FetchResponse, openmrsFetch} from '@openmrs/esm-framework'
-import {FetcherResponse} from 'swr/dist/types'
+import {openmrsFetch} from '@openmrs/esm-framework'
 const s = 'byFullySpecifiedName'
 const name = 'Lab+Samples'
 const v =

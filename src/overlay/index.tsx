@@ -5,14 +5,14 @@ import styles from './overlay.scss'
 import {useLayoutType} from '@openmrs/esm-framework'
 
 interface OverlayProps {
-  close: () => void
+  close: Function
   header: string
   buttonsGroup?: React.ReactElement
 }
 
 const Overlay: React.FC<OverlayProps> = ({
-  close,
   children,
+  close,
   header,
   buttonsGroup,
 }) => {
@@ -28,7 +28,7 @@ const Overlay: React.FC<OverlayProps> = ({
           <div className={styles.headerContent}>{header}</div>
           <Button
             className={styles.closeButton}
-            onClick={close}
+            onClick={() => close()}
             kind="ghost"
             hasIconOnly
             aria-label="close-icon"
@@ -41,7 +41,7 @@ const Overlay: React.FC<OverlayProps> = ({
           className={styles.tabletOverlayHeader}
           aria-label="overlay-header"
         >
-          <Button onClick={close} hasIconOnly aria-label="arrow-icon">
+          <Button onClick={() => close()} hasIconOnly aria-label="arrow-icon">
             <ArrowLeft16 onClick={close} />
           </Button>
           <div className={styles.headerContent}>{header}</div>
