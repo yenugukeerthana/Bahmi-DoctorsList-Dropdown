@@ -12,6 +12,7 @@ import {RouteComponentProps} from 'react-router-dom'
 import {UploadReportProvider} from '../context/upload-report-context'
 import Loader from '../loader/loader.component'
 import PaginatedTable from '../table/paginated-table'
+import ReportTable from '../report-table/report-table.component'
 import UploadReport from '../upload-report/upload-report'
 import styles from './patient-lab-details.scss'
 
@@ -95,6 +96,11 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
               />
             </UploadReportProvider>
           )}
+          <br></br>
+          <br></br>
+          <ReportTable patientUuid={patientUuid} />
+          <br></br>
+          <br></br>
         </div>
       )}
     </main>

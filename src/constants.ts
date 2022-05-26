@@ -21,3 +21,22 @@ export const headers = [
     header: 'Ordered By',
   },
 ]
+
+export const reportHeaders = [
+  {
+    key: 'date',
+    header: 'Report date',
+  },
+  {
+    key: 'tests',
+    header: 'Tests',
+  },
+  {
+    key: 'file',
+    header: 'File',
+  },
+  {
+    key: 'requester',
+    header: 'Requester',
+  },
+]

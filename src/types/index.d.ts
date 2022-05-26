@@ -50,3 +50,40 @@ interface OrderType {
   links: Array<Links>
   resourceVersion: string
 }
+
+interface ReportPresentedForm {
+  contentType: string
+  language: string
+  url: string
+  hash: string
+  title: string
+  creation: Date
+}
+
+interface ReportCoding {
+  system: string
+  code: string
+  display: string
+}
+interface ReportCode {
+  coding: Array<ReportCoding>
+}
+interface ReportResource {
+  resourceType: string
+  id: string
+  meta: Meta2
+  status: string
+  code: Code
+  presentedForm: Array<ReportPresentedForm>
+}
+interface ReportEntry {
+  fullUrl: string
+  resource: Resource
+}
+export interface ReportTableFetchResponse {
+  data: {
+    resourceType: string
+    id: string
+    entry: Array<ReportEntry>
+  }
+}

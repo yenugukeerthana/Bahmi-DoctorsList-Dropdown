@@ -112,7 +112,7 @@ describe('Patient lab details', () => {
     ).toBeInTheDocument()
   })
 
-  it('should render Paginated Table component', () => {
+  it('should render Paginated Table components', () => {
     when(usePatient)
       .calledWith(mockPatientUuid)
       .mockReturnValue({
@@ -137,6 +137,7 @@ describe('Patient lab details', () => {
       </BrowserRouter>,
     )
     expect(screen.getByTitle(/paginated-table/i)).toBeInTheDocument()
+    expect(screen.getByTitle(/report-table/i)).toBeInTheDocument()
   })
 
   it('should display Overlay on click of upload report button', () => {

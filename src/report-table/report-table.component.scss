@@ -1,0 +1,24 @@
+@import "~@openmrs/esm-styleguide/src/vars";
+@import "~carbon-components/src/globals/scss/vars";
+@import "~carbon-components/src/globals/scss/mixins";
+@import '~carbon-components/scss/globals/scss/typography.scss';
+
+.reportTable {
+  &:global(.bx--data-table thead) {
+    color: #525252;
+    height: unset;
+    min-height: unset;
+  }
+  &:global(.bx--data-table tr) {
+    color: #525252;
+    height: unset;
+    min-height: unset;
+  }
+  &:global(.bx--data-table td) {
+    color: #525252;
+    height: unset;
+    min-height: unset;
+  }
+}
+
+
