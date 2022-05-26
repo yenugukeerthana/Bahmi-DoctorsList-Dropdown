@@ -1,8 +1,15 @@
 import AddFilled16 from '@carbon/icons-react/lib/add/16'
 import {ExtensionSlot, usePatient} from '@openmrs/esm-framework'
-import {Button} from 'carbon-components-react'
+import {
+  Button,
+  Column,
+  Grid,
+  Row,
+  ToastNotification,
+} from 'carbon-components-react'
 import React, {useState} from 'react'
 import {RouteComponentProps} from 'react-router-dom'
+import {UploadReportProvider} from '../context/upload-report-context'
 import Loader from '../loader/loader.component'
 import PaginatedTable from '../table/paginated-table'
 import UploadReport from '../upload-report/upload-report'
@@ -17,9 +24,26 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
 }) => {
   const {patientUuid} = match.params
   const {isLoading, patient, error} = usePatient(patientUuid)
-  const [onButtonClick, setOnButtonClick] = useState(false)
+  const [onButtonClick, setOnButtonClick] = useState<boolean>(false)
+  const [onSaveSuccess, setOnSaveSuccess] = useState<boolean>(false)
 
-  const handleClick = () => setOnButtonClick(true)
+  const handleClick = () => {
+    setOnButtonClick(true), setOnSaveSuccess(false)
+  }
+
+  const handleClose = (isSaveSuccess: boolean) => {
+    setOnButtonClick(false)
+    setOnSaveSuccess(isSaveSuccess)
+  }
+
+  const renderSuccessMessage = () => (
+    <ToastNotification
+      kind={'success'}
+      lowContrast={true}
+      title={'Report successfully uploaded'}
+      timeout={1000}
+    />
+  )
 
   return (
     <main
@@ -36,16 +60,23 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
       ) : (
         <div>
           <div>
-            <aside>
-              <ExtensionSlot
-                extensionSlotName="patient-header-slot"
-                state={{
-                  patient,
-                  patientUuid: patient.id,
-                  hideActionsOverflow: true,
-                }}
-              />
-            </aside>
+            <Grid style={{paddingLeft: '0'}}>
+              <Row>
+                <Column lg={9}>
+                  <ExtensionSlot
+                    extensionSlotName="patient-header-slot"
+                    state={{
+                      patient,
+                      patientUuid: patient.id,
+                      hideActionsOverflow: true,
+                    }}
+                  />
+                </Column>
+                <Column lg={3}>
+                  {onSaveSuccess && renderSuccessMessage()}
+                </Column>
+              </Row>
+            </Grid>
           </div>
           <br></br>
           <br></br>
@@ -56,10 +87,13 @@ const PatientLabDetails: React.FC<RouteComponentProps<PatientParamsType>> = ({
             Upload Report
           </Button>
           {onButtonClick && (
-            <UploadReport
-              close={() => setOnButtonClick(false)}
-              header="Upload Report"
-            />
+            <UploadReportProvider>
+              <UploadReport
+                close={(isSaveSuccess = false) => handleClose(isSaveSuccess)}
+                header="Upload Report"
+                patientUuid={patientUuid}
+              />
+            </UploadReportProvider>
           )}
         </div>
       )}
