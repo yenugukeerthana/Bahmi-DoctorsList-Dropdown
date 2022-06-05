@@ -8,3 +8,4 @@ RUN cd /etc/ssl/ &&\
 COPY package/docker/nginx-config/default.conf /etc/nginx/conf.d/
 RUN mkdir /usr/share/nginx/html/lab
 COPY /dist /usr/share/nginx/html/lab
+COPY /dist/index.html /usr/share/nginx/html/index.html
