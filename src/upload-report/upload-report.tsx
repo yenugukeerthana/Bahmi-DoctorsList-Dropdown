@@ -15,6 +15,10 @@ import SelectTest from '../select-test/select-test'
 import UploadFile from '../upload-file/upload-file'
 import {saveDiagnosticReport, uploadFile} from './upload-report.resources'
 import styles from './upload-report.scss'
+// import {useDoctorName} from '../context/doctor-context'
+import {useDoctorName} from '../context/upload-report-context'
+
+import DoctorListDropdown from '../doctor/doctor-list-dropdown'
 
 interface UploadReportProps {
   close: Function
@@ -31,6 +35,8 @@ const UploadReport: React.FC<UploadReportProps> = ({
   const currentDate: string = dayjs().format('MM/DD/YYYY')
   const [reportDate, setReportDate] = useState<Date>(null)
   const [reportConclusion, setReportConclusion] = useState<string>('')
+  const {doctorName, setDoctorName} = useDoctorName()
+
   const [isDiscardButtonClicked, setIsDiscardButtonClicked] = useState<boolean>(
     false,
   )
@@ -44,6 +50,7 @@ const UploadReport: React.FC<UploadReportProps> = ({
     setReportConclusion('')
     setSelectedFile(null)
     setSelectedTests([])
+    setDoctorName(null)
   }
 
   const saveReport = () => {
@@ -85,7 +92,12 @@ const UploadReport: React.FC<UploadReportProps> = ({
       <Button
         onClick={saveReport}
         size="lg"
-        disabled={!reportDate || !selectedFile || selectedTests.length === 0}
+        disabled={
+          !reportDate ||
+          !selectedFile ||
+          !doctorName ||
+          selectedTests.length === 0
+        }
       >
         Save and Upload
       </Button>
@@ -115,7 +127,8 @@ const UploadReport: React.FC<UploadReportProps> = ({
           />
         </label>
       </DatePicker>
-
+      <br></br>
+      <DoctorListDropdown />
       <div style={{paddingTop: '1rem'}}>
         <TextArea
           labelText={

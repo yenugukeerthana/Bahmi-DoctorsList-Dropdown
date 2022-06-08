@@ -15,6 +15,8 @@ import PaginatedTable from '../table/paginated-table'
 import ReportTable from '../report-table/report-table.component'
 import UploadReport from '../upload-report/upload-report'
 import styles from './patient-lab-details.scss'
+// import {DoctorProvider} from '../context/doctor-context'
+// import {DoctorProvider} from '../context/upload-report-context'
 
 interface PatientParamsType {
   patientUuid: string

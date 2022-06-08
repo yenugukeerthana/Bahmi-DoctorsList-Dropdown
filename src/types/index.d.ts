@@ -27,6 +27,17 @@ export interface LabOrders {
 export interface LabOrdersFetchResponse {
   data: {results: Array<LabOrders>}
 }
+
+export interface DoctorDetailsData {
+  uuid: string
+  display: string
+  links: Array<Links>
+  type: string
+}
+
+export interface DoctorsResponse {
+  data: {results: Array<DoctorDetailsData>} //seperate interface
+}
 interface GeneralInfo {
   uuid: string
   display: string

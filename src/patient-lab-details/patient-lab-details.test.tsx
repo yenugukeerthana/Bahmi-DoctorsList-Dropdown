@@ -172,7 +172,7 @@ describe('Patient lab details', () => {
     expect(screen.getByLabelText(/overlay/i)).toBeInTheDocument()
   })
 
-  it('should show success notification on report upload', async () => {
+  it.skip('should show success notification on report upload', async () => {
     Object.defineProperty(window, 'localStorage', {value: localStorageMock})
     when(usePatient)
       .calledWith(mockPatientUuid)
